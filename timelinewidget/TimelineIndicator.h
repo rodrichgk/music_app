@@ -4,7 +4,8 @@
 #include <QGraphicsItem>
 #include <QPainter>
 
-class TimelineIndicator : public QGraphicsItem {
+class TimelineIndicator :public QObject, public QGraphicsItem {
+    Q_OBJECT
 public:
     explicit TimelineIndicator(qreal height, QGraphicsItem *parent = nullptr);
 
@@ -18,6 +19,9 @@ private:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
     QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
     qreal m_height;
+
+signals:
+    void indicatorMoved(TimelineIndicator* indicator);
 };
 
 #endif // TIMELINEINDICATOR_H

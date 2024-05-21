@@ -32,6 +32,7 @@ void TimelineIndicator::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 
 void TimelineIndicator::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
     QGraphicsItem::mouseMoveEvent(event);
+    emit indicatorMoved(this);
 }
 
 void TimelineIndicator::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){

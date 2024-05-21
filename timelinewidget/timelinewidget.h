@@ -64,7 +64,7 @@ protected:
 
 public slots:
     void handleAudioItemPositionChange(const QPointF& newPosition);
-    void focusOnItem(AudioItem* item);
+    void focusOnItem(QGraphicsItem* item);
     void setCurrentItem(AudioItem* item);
     void moveIndicator();
 };

@@ -17,7 +17,8 @@ TimelineWidget::TimelineWidget(QWidget* parent) :
     scene_width(5000),
     scrollLeft(false),
     scrollRight(false),
-    m_trackIdWidth(200)
+    m_trackIdWidth(200),
+    m_isMoving(false)
 {
     setupUi();
     createTracksAndItems();
@@ -67,6 +68,19 @@ void TimelineWidget::setupUi() {
     m_splitter->addWidget(m_view);
 }
 
+void TimelineWidget::setupConnections() {
+    // Here, connect signals and slots for interaction, e.g., track mute toggles.
+    scrollTimer = new QTimer(this);
+    connect(scrollTimer, &QTimer::timeout, this, &TimelineWidget::performScroll);
+    scrollTimer->start(20);
+
+    m_playTimer = new QTimer(this);
+    connect(m_playTimer, &QTimer::timeout, this, &TimelineWidget::moveIndicator);
+
+    QObject::connect(m_indicator,&TimelineIndicator::indicatorMoved,this,&TimelineWidget::focusOnItem);
+
+}
+
 void TimelineWidget::initializelayout(){
     m_layout = new QVBoxLayout(this);
     setLayout(m_layout);
@@ -109,15 +123,6 @@ void TimelineWidget::addSecondLines(){
         line->setPen(pen);
         m_scene->addItem(line);
     }
-}
-void TimelineWidget::setupConnections() {
-    // Here, connect signals and slots for interaction, e.g., track mute toggles.
-    scrollTimer = new QTimer(this);
-    connect(scrollTimer, &QTimer::timeout, this, &TimelineWidget::performScroll);
-    scrollTimer->start(20);
-
-    m_playTimer = new QTimer(this);
-    connect(m_playTimer, &QTimer::timeout, this, &TimelineWidget::moveIndicator);
 }
 
 void TimelineWidget::addTrack(Track* track) {
@@ -199,7 +204,7 @@ void TimelineWidget::decelerateAndCenterItem(QGraphicsItem* item) {
 }
 
 
-void TimelineWidget::focusOnItem(AudioItem *item)
+void TimelineWidget::focusOnItem(QGraphicsItem *item)
 {
     //currentItem = item;
     if (item && m_view) {
@@ -289,23 +294,14 @@ void TimelineWidget::performScroll(){
 void TimelineWidget::keyPressEvent(QKeyEvent *event){
     if(event->key() == Qt::Key_Space)
     {
-        if(m_isMoving == true)
-        {
-            m_isMoving = false;
-        }
-        else
-        {
-            m_isMoving = true;
-        }
+        m_isMoving = !m_isMoving;
 
         if(m_isMoving){
-            m_playTimer->start(100);
-            qDebug() << "is moving is :" << m_isMoving;
+            m_playTimer->start(20);
         }
         else
         {
             m_playTimer->stop();
-            qDebug() << "is moving is :" << m_isMoving;
         }
     }
     else
@@ -315,5 +311,7 @@ void TimelineWidget::keyPressEvent(QKeyEvent *event){
 }
 
 void TimelineWidget::moveIndicator(){
-    m_indicator->moveBy(10,0);
+    m_indicator->moveBy(2,0);
+    QPointF indicatorPos = m_indicator->scenePos();
+    m_view->centerOn(indicatorPos.x(), m_view->mapToScene(m_view->viewport()->rect().center()).y());
 }
