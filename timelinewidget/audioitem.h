@@ -6,6 +6,15 @@
 #include <QGraphicsRectItem>
 #include <QColor>
 #include <QBrush>
+#include <vector>
+
+extern "C" {
+#include <libavformat/avformat.h>
+#include <libavcodec/avcodec.h>
+#include <libavutil/avutil.h>
+#include <libswresample/swresample.h>
+#include <libavutil/opt.h>
+}
 
 class AudioItem : public QObject,public QGraphicsRectItem {
     Q_OBJECT
@@ -29,6 +38,9 @@ public:
 
     void updateGeometry(qreal startTime, qreal duration);
 
+    void loadaudiowaveform(const QString &filePath);
+
+
 private:
     int m_trackNumber;
     QPointF m_initialPos;
@@ -44,6 +56,10 @@ private:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
     // Item change event handler
     QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
+    std::vector<qreal> m_waveform;
+
+    void processAudioFile(const QString &filePath);
+    void cleanup_and_return(AVFormatContext* formatContext, AVCodecContext* codecContext, SwrContext* swrContext, AVPacket* packet, AVFrame* frame);
 
 signals:
     void positionChanged(const QPointF& newPosition);

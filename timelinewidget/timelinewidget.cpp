@@ -13,7 +13,7 @@ TimelineWidget::TimelineWidget(QWidget* parent) :
     QWidget(parent),
     m_trackHeight(50),
     m_trackPosY(0),
-    scene_height(500),
+    scene_height(1020),
     scene_width(5000),
     scrollLeft(false),
     scrollRight(false),
@@ -42,6 +42,7 @@ void TimelineWidget::createTracksAndItems() {
         qint64 duration = 100; // Duration set to 1 seconds (1000 milliseconds)
         QColor randomColor = QColor::fromRgb(QRandomGenerator::global()->generate());
         AudioItem* newItem = new AudioItem(i + 1, 0, duration, randomColor, m_trackHeight, newTrack);
+        //newItem->loadaudiowaveform("/home/gabhy/Documents/CuteFish_apps/Music_App/Music_App/testfile.mp3");
         newTrack->addAudioItem(newItem);
         QObject::connect(newItem, &AudioItem::positionChanged, this, &TimelineWidget::handleAudioItemPositionChange);
         QObject::connect(newItem,&AudioItem::itemMoved,this,&TimelineWidget::focusOnItem);
@@ -98,7 +99,7 @@ void TimelineWidget::setupTrackList(){
 
 void TimelineWidget::setupGraphicsView(){
     m_scene = new QGraphicsScene(this);
-    m_scene->setSceneRect(0, 0, 800, 600); // Placeholder values for scene dimensions
+    m_scene->setSceneRect(0, 0, scene_width, scene_height); // Placeholder values for scene dimensions
     m_view = new QGraphicsView(m_scene);
     m_view->setMinimumWidth(400);
     m_view->setAlignment(Qt::AlignLeft | Qt::AlignTop);
@@ -119,7 +120,7 @@ void TimelineWidget::addTimeIndicators(){
 void TimelineWidget::addSecondLines(){
     QPen pen(Qt::black);
     for (int i = 0; i <= m_scene->width() / 10; ++i) {
-        QGraphicsLineItem* line = new QGraphicsLineItem(i * 100, 0, i * 100, m_scene->height() - 30);
+        QGraphicsLineItem* line = new QGraphicsLineItem(i * 100, 0, i * 100, m_scene->height() - m_trackHeight);
         line->setPen(pen);
         m_scene->addItem(line);
     }
@@ -206,7 +207,6 @@ void TimelineWidget::decelerateAndCenterItem(QGraphicsItem* item) {
 
 void TimelineWidget::focusOnItem(QGraphicsItem *item)
 {
-    //currentItem = item;
     if (item && m_view) {
         qreal itemMiddleX = item->pos().x() + (item->boundingRect().width() / 2);
 
