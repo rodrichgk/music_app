@@ -16,16 +16,23 @@ void TimelineIndicator::paint(QPainter *painter, const QStyleOptionGraphicsItem 
     Q_UNUSED(option)
     Q_UNUSED(widget)
 
+    // Enable antialiasing for smoother rendering
+    painter->setRenderHint(QPainter::Antialiasing);
+    
+    // Clear the area first to prevent artifacts
+    painter->fillRect(boundingRect(), Qt::transparent);
+
     // Draw the triangle
-    // Define the triangle
     QPolygonF triangle;
     triangle << QPointF(-10, 0) << QPointF(10, 0) << QPointF(0, 20);
-    QPen pen(Qt::green, 1); // Adjust color and thickness as needed
+    QPen pen(Qt::green, 2); // Slightly thicker pen
     painter->setPen(pen);
 
-    QBrush brush(Qt::green); // Use the same color as the pen for a solid fill
+    QBrush brush(Qt::green);
     painter->setBrush(brush);
     painter->drawPolygon(triangle);
+    
+    // Draw the vertical line
     painter->setBrush(Qt::NoBrush);
     painter->drawLine(QPointF(0, 20), QPointF(0, m_height));
 }

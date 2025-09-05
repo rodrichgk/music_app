@@ -11,18 +11,40 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Multimedia)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Multimedia)
-pkg_check_modules(LIBAV REQUIRED IMPORTED_TARGET
-    libavformat
-    libavcodec
-    libavutil
-    libswresample
-)
+
+# Try to find PkgConfig and FFmpeg libraries (optional for now)
+find_package(PkgConfig QUIET)
+if(PKG_CONFIG_FOUND)
+    pkg_check_modules(LIBAV IMPORTED_TARGET
+        libavformat
+        libavcodec
+        libavutil
+        libswresample
+    )
+    if(LIBAV_FOUND)
+        message(STATUS "Found FFmpeg libraries")
+        set(HAVE_FFMPEG TRUE)
+    else()
+        message(WARNING "FFmpeg libraries not found - audio waveform display will be disabled")
+        set(HAVE_FFMPEG FALSE)
+    endif()
+else()
+    message(WARNING "PkgConfig not found - FFmpeg support disabled")
+    set(HAVE_FFMPEG FALSE)
+endif()
 
 set(PROJECT_SOURCES
     src/main.cpp
     src/mainwindow.cpp
     src/mainwindow.h
     src/mainwindow.ui
+    src/appconfig.cpp
+    src/appconfig.h
+    src/audioerror.h
+    src/audioengine.cpp
+    src/audioengine.h
+    src/transportdock.cpp
+    src/transportdock.h
     timelinewidget/timelinewidget.cpp
     timelinewidget/timelinewidget.h
     timelinewidget/audioitem.cpp
@@ -58,7 +80,13 @@ endif()
 
 target_link_libraries(Music_App PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Multimedia)
 
-target_link_libraries(Music_App PRIVATE PkgConfig::LIBAV)
+# Link FFmpeg libraries only if found
+if(HAVE_FFMPEG)
+    target_link_libraries(Music_App PRIVATE PkgConfig::LIBAV)
+    target_compile_definitions(Music_App PRIVATE HAVE_FFMPEG=1)
+else()
+    target_compile_definitions(Music_App PRIVATE HAVE_FFMPEG=0)
+endif()
 
 
 

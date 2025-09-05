@@ -6,6 +6,7 @@
 
 class TimelineIndicator :public QObject, public QGraphicsItem {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
 public:
     explicit TimelineIndicator(qreal height, QGraphicsItem *parent = nullptr);
 

@@ -8,6 +8,7 @@
 
 class Track : public QObject ,public QGraphicsItem {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
 public:
     explicit Track(int trackHeight, qreal trackWidth);
     ~Track() override;

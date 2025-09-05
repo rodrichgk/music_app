@@ -7,7 +7,9 @@
 #include <QColor>
 #include <QBrush>
 #include <vector>
+#include "../src/audioerror.h"
 
+#if HAVE_FFMPEG
 extern "C" {
 #include <libavformat/avformat.h>
 #include <libavcodec/avcodec.h>
@@ -15,6 +17,7 @@ extern "C" {
 #include <libswresample/swresample.h>
 #include <libavutil/opt.h>
 }
+#endif
 
 class AudioItem : public QObject,public QGraphicsRectItem {
     Q_OBJECT
@@ -38,7 +41,7 @@ public:
 
     void updateGeometry(qreal startTime, qreal duration);
 
-    void loadaudiowaveform(const QString &filePath);
+    AudioResult loadaudiowaveform(const QString &filePath);
 
 
 private:
@@ -58,8 +61,9 @@ private:
     QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
     std::vector<qreal> m_waveform;
 
-    void processAudioFile(const QString &filePath);
-    void cleanup_and_return(AVFormatContext* formatContext, AVCodecContext* codecContext, SwrContext* swrContext, AVPacket* packet, AVFrame* frame);
+#if HAVE_FFMPEG
+    AudioResult processAudioFile(const QString &filePath);
+#endif
 
 signals:
     void positionChanged(const QPointF& newPosition);
