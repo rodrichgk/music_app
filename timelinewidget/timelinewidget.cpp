@@ -89,6 +89,9 @@ void TimelineWidget::addAudioItemToTrack(const QString& filePath, int trackIndex
         qDebug() << "ERROR: Failed to create audio item";
         return;
     }
+    
+    // Set the time indicator height for proper positioning calculations
+    audioItem->setTimeIndicatorHeight(m_timeIndicatorHeight);
     qDebug() << "AudioItem created successfully";
     
     // Load waveform data from the audio file
@@ -101,15 +104,36 @@ void TimelineWidget::addAudioItemToTrack(const QString& filePath, int trackIndex
         qDebug() << "Waveform data loaded successfully";
     }
     
-    // Position the audio item properly aligned with the track
-    // Each track starts after the time indicator height, then each subsequent track is offset by track height
+    // === POSITIONING MEASUREMENTS LOG ===
+    qDebug() << "=== AUDIO ITEM INITIAL POSITIONING ===";
+    qDebug() << "Timeline measurements:";
+    qDebug() << "  - m_timeIndicatorHeight:" << m_timeIndicatorHeight;
+    qDebug() << "  - m_trackHeight:" << m_trackHeight;
+    qDebug() << "  - scene_height:" << scene_height;
+    qDebug() << "  - Number of tracks:" << m_tracks.size();
+    
+    qDebug() << "Audio item parameters:";
+    qDebug() << "  - Target track index:" << trackIndex;
+    qDebug() << "  - Start time:" << startTime;
+    qDebug() << "  - Duration:" << duration;
+    
+    // Calculate Y position with detailed logging
     qreal yPos = m_timeIndicatorHeight + (trackIndex * m_trackHeight);
-    qDebug() << "Positioning audio item at (" << startTime << "," << yPos << ")";
-    qDebug() << "  - Time indicator height:" << m_timeIndicatorHeight;
-    qDebug() << "  - Track index:" << trackIndex;
-    qDebug() << "  - Track height:" << m_trackHeight;
-    qDebug() << "  - Calculated Y position:" << yPos;
+    qDebug() << "Position calculation:";
+    qDebug() << "  - Formula: m_timeIndicatorHeight + (trackIndex * m_trackHeight)";
+    qDebug() << "  - Calculation:" << m_timeIndicatorHeight << " + (" << trackIndex << " * " << m_trackHeight << ")";
+    qDebug() << "  - Result Y position:" << yPos;
+    
+    // Log track boundaries for reference
+    for (int i = 0; i < m_tracks.size(); ++i) {
+        qreal trackStartY = m_timeIndicatorHeight + (i * m_trackHeight);
+        qreal trackEndY = trackStartY + m_trackHeight;
+        qDebug() << "  - Track" << i << "boundaries: Y" << trackStartY << "to" << trackEndY;
+    }
+    
     audioItem->setPos(startTime, yPos);
+    qDebug() << "Audio item positioned at scene coordinates (" << startTime << "," << yPos << ")";
+    qDebug() << "=== END INITIAL POSITIONING ===\n";
     
     // Add to track and scene
     qDebug() << "Adding audio item to track...";

@@ -10,6 +10,8 @@
 		"C:/Users/kibar/Documents/music_app/CMakeLists.txt",
 		"C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake",
 		"C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeSystem.cmake",
+		"C:/vcpkg/scripts/buildsystems/vcpkg.cmake",
+		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeDependentOption.cmake",
 		"C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/.qtc/package-manager/maintenance_tool_provider.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-Initialize.cmake",
@@ -405,12 +407,6 @@
 		"C:/Qt/6.9.2/mingw_64/lib/cmake/Qt6/QtPublicWindowsHelpers.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake",
 		"C:/Qt/6.9.2/mingw_64/lib/cmake/Qt6/Qt6Dependencies.cmake",
-		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/FindPkgConfig.cmake",
-		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/FindPackageHandleStandardArgs.cmake",
-		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/FindPackageMessage.cmake",
-		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/FindPkgConfig.cmake",
-		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/FindPackageHandleStandardArgs.cmake",
-		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/FindPackageMessage.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/GNUInstallDirs.cmake"
 	],
 	"CMAKE_SOURCE_DIR" : "C:/Users/kibar/Documents/music_app",
@@ -479,7 +475,7 @@
 	"MOC_COMPILATION_FILE" : "C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Music_App_autogen/mocs_compilation.cpp",
 	"MOC_DEFINITIONS" : 
 	[
-		"HAVE_FFMPEG=0",
+		"HAVE_FFMPEG=1",
 		"MINGW_HAS_SECURE_API=1",
 		"QT_CORE_LIB",
 		"QT_GUI_LIB",
@@ -503,6 +499,7 @@
 	],
 	"MOC_INCLUDES" : 
 	[
+		"C:/vcpkg/installed/x64-mingw-dynamic/include",
 		"C:/Qt/6.9.2/mingw_64/include/QtCore",
 		"C:/Qt/6.9.2/mingw_64/include",
 		"C:/Qt/6.9.2/mingw_64/mkspecs/win32-g++",

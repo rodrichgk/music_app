@@ -23,6 +23,9 @@ class AudioItem : public QObject,public QGraphicsRectItem {
     Q_OBJECT
 public:
     explicit AudioItem(int trackNumber, qreal startTime, qreal duration, const QColor& color, int trackHeight, QGraphicsItem* parent);
+    
+    // Add method to set time indicator height for proper positioning
+    void setTimeIndicatorHeight(int height) { m_timeIndicatorHeight = height; }
     ~AudioItem();
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
@@ -52,6 +55,7 @@ private:
     qreal m_duration;
     QColor m_color;
     int m_trackHeight; // New private member variable to store track height
+    int m_timeIndicatorHeight = 0; // Store time indicator height for positioning
     QPointF m_lastPos; // Store last mouse press position for dragging
     // Mouse event handlers
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;

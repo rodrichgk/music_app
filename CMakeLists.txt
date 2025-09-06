@@ -9,30 +9,26 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# -------------------------------
+# Qt setup
+# -------------------------------
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Multimedia)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Multimedia)
 
-# Try to find PkgConfig and FFmpeg libraries (optional for now)
-find_package(PkgConfig QUIET)
-if(PKG_CONFIG_FOUND)
-    pkg_check_modules(LIBAV IMPORTED_TARGET
-        libavformat
-        libavcodec
-        libavutil
-        libswresample
-    )
-    if(LIBAV_FOUND)
-        message(STATUS "Found FFmpeg libraries")
-        set(HAVE_FFMPEG TRUE)
-    else()
-        message(WARNING "FFmpeg libraries not found - audio waveform display will be disabled")
-        set(HAVE_FFMPEG FALSE)
-    endif()
-else()
-    message(WARNING "PkgConfig not found - FFmpeg support disabled")
-    set(HAVE_FFMPEG FALSE)
-endif()
+# -------------------------------
+# FFmpeg Hardcoded Paths (Manual Override)
+# -------------------------------
+# We define the paths directly to avoid any detection issues.
+set(FFMPEG_INCLUDE_DIR "C:/vcpkg/installed/x64-mingw-dynamic/include")
+set(FFMPEG_LIBRARY_DIR "C:/vcpkg/installed/x64-mingw-dynamic/lib")
+set(FFMPEG_LIBRARIES avformat avcodec avutil swresample swscale)
 
+message(STATUS "Using hardcoded FFmpeg include path: ${FFMPEG_INCLUDE_DIR}")
+message(STATUS "Using hardcoded FFmpeg library path: ${FFMPEG_LIBRARY_DIR}")
+
+# -------------------------------
+# Sources
+# -------------------------------
 set(PROJECT_SOURCES
     src/main.cpp
     src/mainwindow.cpp
@@ -55,44 +51,37 @@ set(PROJECT_SOURCES
     timelinewidget/TimelineIndicator.h
 )
 
+# -------------------------------
+# Target
+# -------------------------------
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Music_App
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
-# Define target properties for Android with Qt 6 as:
-#    set_property(TARGET Music_App APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
-# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
-    if(ANDROID)
-        add_library(Music_App SHARED
-            ${PROJECT_SOURCES}
-        )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-    else()
-        add_executable(Music_App
-            ${PROJECT_SOURCES}
-        )
-    endif()
+    add_executable(Music_App ${PROJECT_SOURCES})
 endif()
 
-target_link_libraries(Music_App PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Multimedia)
+# -------------------------------
+# Linking
+# -------------------------------
+target_link_libraries(Music_App PRIVATE
+    Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::Multimedia
+)
 
-# Link FFmpeg libraries only if found
-if(HAVE_FFMPEG)
-    target_link_libraries(Music_App PRIVATE PkgConfig::LIBAV)
-    target_compile_definitions(Music_App PRIVATE HAVE_FFMPEG=1)
-else()
-    target_compile_definitions(Music_App PRIVATE HAVE_FFMPEG=0)
-endif()
+# --- Direct linking for FFmpeg ---
+# We add the paths and libraries directly to the target.
+target_include_directories(Music_App PRIVATE ${FFMPEG_INCLUDE_DIR})
+target_link_directories(Music_App PRIVATE ${FFMPEG_LIBRARY_DIR})
+target_link_libraries(Music_App PRIVATE ${FFMPEG_LIBRARIES})
+target_compile_definitions(Music_App PRIVATE HAVE_FFMPEG=1)
 
 
-
-# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
-# If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
+# -------------------------------
+# Bundle / install
+# -------------------------------
 if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.Music_App)
 endif()

@@ -1,0 +1,26 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "mingw-vcpkg",
+            "displayName": "MinGW with vcpkg",
+            "description": "MinGW build with vcpkg toolchain and Qt",
+            "generator": "MinGW Makefiles",
+            "binaryDir": "${sourceDir}/build",
+            "toolchainFile": "C:/vcpkg/scripts/buildsystems/vcpkg.cmake",
+            "cacheVariables": {
+                "CMAKE_PREFIX_PATH": "C:/Qt/6.9.2/mingw_64"
+            },
+            "environment": {
+                "PATH": "C:/Qt/Tools/mingw1310_64/bin;$penv{PATH}"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "mingw-vcpkg-build",
+            "displayName": "Build with MinGW",
+            "configurePreset": "mingw-vcpkg"
+        }
+    ]
+}

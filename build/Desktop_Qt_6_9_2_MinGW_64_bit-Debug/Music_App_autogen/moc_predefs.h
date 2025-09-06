@@ -54,7 +54,7 @@
 #define __INT_LEAST8_WIDTH__ 8
 #define __cpp_variadic_using 201611L
 #define __UINT_LEAST64_MAX__ 0xffffffffffffffffULL
-#define HAVE_FFMPEG 0
+#define HAVE_FFMPEG 1
 #define __INT_LEAST8_MAX__ 0x7f
 #define __cpp_attributes 200809L
 #define __cpp_capture_star_this 201603L

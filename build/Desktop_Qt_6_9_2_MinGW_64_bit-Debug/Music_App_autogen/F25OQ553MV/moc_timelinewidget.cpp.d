@@ -338,6 +338,7 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/limits \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/list \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/map \
+  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/math.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/memory \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/new \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/numeric \
@@ -405,6 +406,7 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/crtdefs.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/ctype.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/errno.h \
+  C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/inttypes.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/locale.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/process.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/pthread.h \
@@ -430,4 +432,40 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Users/kibar/Documents/music_app/src/audioerror.h \
   C:/Users/kibar/Documents/music_app/timelinewidget/TimelineIndicator.h \
   C:/Users/kibar/Documents/music_app/timelinewidget/audioitem.h \
-  C:/Users/kibar/Documents/music_app/timelinewidget/track.h
+  C:/Users/kibar/Documents/music_app/timelinewidget/track.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/avcodec.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/codec.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/codec_desc.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/codec_id.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/codec_par.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/defs.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/packet.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/version.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/version_major.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavformat/avformat.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavformat/avio.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavformat/version.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavformat/version_major.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/attributes.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/avconfig.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/avutil.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/buffer.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/channel_layout.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/common.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/dict.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/error.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/frame.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/hwcontext.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/intfloat.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/log.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/macros.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/mathematics.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/mem.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/opt.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/pixfmt.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/rational.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/samplefmt.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/version.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libswresample/swresample.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libswresample/version.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libswresample/version_major.h

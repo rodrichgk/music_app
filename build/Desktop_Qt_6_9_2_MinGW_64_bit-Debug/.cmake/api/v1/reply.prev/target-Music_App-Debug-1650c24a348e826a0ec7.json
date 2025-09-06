@@ -8,11 +8,12 @@
 			"path" : "Music_App.pdb"
 		}
 	],
-	"backtrace" : 4,
+	"backtrace" : 5,
 	"backtraceGraph" : 
 	{
 		"commands" : 
 		[
+			"_add_executable",
 			"add_executable",
 			"_qt_internal_create_executable",
 			"qt6_add_executable",
@@ -21,6 +22,7 @@
 			"target_link_libraries",
 			"set_target_properties",
 			"include",
+			"_find_package",
 			"find_package",
 			"find_dependency",
 			"_qt_internal_find_qt_dependencies",
@@ -28,6 +30,7 @@
 		],
 		"files" : 
 		[
+			"C:/vcpkg/scripts/buildsystems/vcpkg.cmake",
 			"C:/Qt/6.9.2/mingw_64/lib/cmake/Qt6Core/Qt6CoreMacros.cmake",
 			"CMakeLists.txt",
 			"C:/Qt/6.9.2/mingw_64/lib/cmake/Qt6Widgets/Qt6WidgetsTargets.cmake",
@@ -52,318 +55,390 @@
 		"nodes" : 
 		[
 			{
-				"file" : 1
+				"file" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 2,
+				"line" : 54,
+				"parent" : 0
 			},
 			{
 				"command" : 3,
 				"file" : 1,
-				"line" : 57,
-				"parent" : 0
-			},
-			{
-				"command" : 2,
-				"file" : 0,
 				"line" : 967,
 				"parent" : 1
 			},
 			{
-				"command" : 1,
-				"file" : 0,
+				"command" : 2,
+				"file" : 1,
 				"line" : 638,
 				"parent" : 2
 			},
 			{
-				"command" : 0,
-				"file" : 0,
+				"command" : 1,
+				"file" : 1,
 				"line" : 714,
 				"parent" : 3
 			},
 			{
-				"command" : 4,
-				"file" : 1,
-				"line" : 106,
-				"parent" : 0
+				"command" : 0,
+				"file" : 0,
+				"line" : 600,
+				"parent" : 4
 			},
 			{
 				"command" : 5,
-				"file" : 1,
-				"line" : 79,
-				"parent" : 0
-			},
-			{
-				"command" : 8,
-				"file" : 1,
-				"line" : 13,
-				"parent" : 0
-			},
-			{
-				"command" : 8,
-				"file" : 4,
-				"line" : 297,
-				"parent" : 7
-			},
-			{
-				"file" : 3,
-				"parent" : 8
-			},
-			{
-				"command" : 7,
-				"file" : 3,
-				"line" : 55,
-				"parent" : 9
-			},
-			{
 				"file" : 2,
-				"parent" : 10
+				"line" : 96,
+				"parent" : 0
 			},
 			{
 				"command" : 6,
 				"file" : 2,
-				"line" : 61,
+				"line" : 65,
+				"parent" : 0
+			},
+			{
+				"command" : 10,
+				"file" : 2,
+				"line" : 16,
+				"parent" : 0
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 896,
+				"parent" : 8
+			},
+			{
+				"command" : 10,
+				"file" : 5,
+				"line" : 297,
+				"parent" : 9
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 896,
+				"parent" : 10
+			},
+			{
+				"file" : 4,
 				"parent" : 11
+			},
+			{
+				"command" : 8,
+				"file" : 4,
+				"line" : 55,
+				"parent" : 12
+			},
+			{
+				"file" : 3,
+				"parent" : 13
 			},
 			{
 				"command" : 7,
 				"file" : 3,
-				"line" : 43,
-				"parent" : 9
-			},
-			{
-				"file" : 9,
-				"parent" : 13
-			},
-			{
-				"command" : 10,
-				"file" : 9,
-				"line" : 45,
+				"line" : 61,
 				"parent" : 14
 			},
 			{
-				"command" : 9,
-				"file" : 8,
+				"command" : 8,
+				"file" : 4,
+				"line" : 43,
+				"parent" : 12
+			},
+			{
+				"file" : 10,
+				"parent" : 16
+			},
+			{
+				"command" : 12,
+				"file" : 10,
+				"line" : 45,
+				"parent" : 17
+			},
+			{
+				"command" : 11,
+				"file" : 9,
 				"line" : 142,
-				"parent" : 15
+				"parent" : 18
+			},
+			{
+				"command" : 10,
+				"file" : 8,
+				"line" : 76,
+				"parent" : 19
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 896,
+				"parent" : 20
+			},
+			{
+				"command" : 10,
+				"file" : 5,
+				"line" : 315,
+				"parent" : 21
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 896,
+				"parent" : 22
+			},
+			{
+				"file" : 7,
+				"parent" : 23
 			},
 			{
 				"command" : 8,
 				"file" : 7,
-				"line" : 76,
-				"parent" : 16
-			},
-			{
-				"command" : 8,
-				"file" : 4,
-				"line" : 315,
-				"parent" : 17
-			},
-			{
-				"file" : 6,
-				"parent" : 18
-			},
-			{
-				"command" : 7,
-				"file" : 6,
-				"line" : 55,
-				"parent" : 19
-			},
-			{
-				"file" : 5,
-				"parent" : 20
-			},
-			{
-				"command" : 6,
-				"file" : 5,
-				"line" : 61,
-				"parent" : 21
-			},
-			{
-				"command" : 8,
-				"file" : 4,
-				"line" : 297,
-				"parent" : 7
-			},
-			{
-				"file" : 11,
-				"parent" : 23
-			},
-			{
-				"command" : 7,
-				"file" : 11,
 				"line" : 55,
 				"parent" : 24
 			},
 			{
-				"file" : 10,
+				"file" : 6,
 				"parent" : 25
 			},
 			{
-				"command" : 6,
-				"file" : 10,
+				"command" : 7,
+				"file" : 6,
 				"line" : 61,
 				"parent" : 26
 			},
 			{
-				"command" : 5,
-				"file" : 0,
-				"line" : 639,
-				"parent" : 2
+				"command" : 10,
+				"file" : 5,
+				"line" : 297,
+				"parent" : 9
 			},
 			{
 				"command" : 9,
-				"file" : 8,
-				"line" : 142,
-				"parent" : 15
+				"file" : 0,
+				"line" : 896,
+				"parent" : 28
 			},
 			{
-				"command" : 8,
-				"file" : 7,
-				"line" : 76,
+				"file" : 12,
 				"parent" : 29
 			},
 			{
 				"command" : 8,
-				"file" : 4,
-				"line" : 315,
+				"file" : 12,
+				"line" : 55,
 				"parent" : 30
 			},
 			{
-				"file" : 13,
+				"file" : 11,
 				"parent" : 31
 			},
 			{
 				"command" : 7,
-				"file" : 13,
-				"line" : 57,
+				"file" : 11,
+				"line" : 61,
 				"parent" : 32
-			},
-			{
-				"file" : 12,
-				"parent" : 33
 			},
 			{
 				"command" : 6,
-				"file" : 12,
-				"line" : 61,
-				"parent" : 34
+				"file" : 1,
+				"line" : 639,
+				"parent" : 2
 			},
 			{
-				"command" : 7,
-				"file" : 13,
-				"line" : 45,
-				"parent" : 32
+				"command" : 11,
+				"file" : 9,
+				"line" : 142,
+				"parent" : 18
 			},
 			{
-				"file" : 16,
+				"command" : 10,
+				"file" : 8,
+				"line" : 76,
+				"parent" : 35
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 896,
 				"parent" : 36
 			},
 			{
 				"command" : 10,
-				"file" : 16,
-				"line" : 46,
+				"file" : 5,
+				"line" : 315,
 				"parent" : 37
 			},
 			{
 				"command" : 9,
-				"file" : 8,
-				"line" : 142,
+				"file" : 0,
+				"line" : 896,
 				"parent" : 38
 			},
 			{
-				"command" : 8,
-				"file" : 7,
-				"line" : 76,
+				"file" : 14,
 				"parent" : 39
 			},
 			{
 				"command" : 8,
-				"file" : 4,
-				"line" : 315,
+				"file" : 14,
+				"line" : 57,
 				"parent" : 40
 			},
 			{
-				"file" : 15,
+				"file" : 13,
 				"parent" : 41
 			},
 			{
 				"command" : 7,
-				"file" : 15,
-				"line" : 55,
+				"file" : 13,
+				"line" : 61,
 				"parent" : 42
 			},
 			{
+				"command" : 8,
 				"file" : 14,
-				"parent" : 43
-			},
-			{
-				"command" : 6,
-				"file" : 14,
-				"line" : 61,
-				"parent" : 44
-			},
-			{
-				"command" : 6,
-				"file" : 14,
-				"line" : 83,
-				"parent" : 44
-			},
-			{
-				"command" : 7,
-				"file" : 11,
-				"line" : 43,
-				"parent" : 24
-			},
-			{
-				"file" : 19,
-				"parent" : 47
-			},
-			{
-				"command" : 10,
-				"file" : 19,
 				"line" : 45,
-				"parent" : 48
-			},
-			{
-				"command" : 9,
-				"file" : 8,
-				"line" : 142,
-				"parent" : 49
-			},
-			{
-				"command" : 8,
-				"file" : 7,
-				"line" : 76,
-				"parent" : 50
-			},
-			{
-				"command" : 8,
-				"file" : 4,
-				"line" : 315,
-				"parent" : 51
-			},
-			{
-				"file" : 18,
-				"parent" : 52
-			},
-			{
-				"command" : 7,
-				"file" : 18,
-				"line" : 55,
-				"parent" : 53
+				"parent" : 40
 			},
 			{
 				"file" : 17,
-				"parent" : 54
+				"parent" : 44
 			},
 			{
-				"command" : 6,
+				"command" : 12,
 				"file" : 17,
-				"line" : 61,
-				"parent" : 55
+				"line" : 46,
+				"parent" : 45
 			},
 			{
 				"command" : 11,
-				"file" : 1,
-				"line" : 86,
+				"file" : 9,
+				"line" : 142,
+				"parent" : 46
+			},
+			{
+				"command" : 10,
+				"file" : 8,
+				"line" : 76,
+				"parent" : 47
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 896,
+				"parent" : 48
+			},
+			{
+				"command" : 10,
+				"file" : 5,
+				"line" : 315,
+				"parent" : 49
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 896,
+				"parent" : 50
+			},
+			{
+				"file" : 16,
+				"parent" : 51
+			},
+			{
+				"command" : 8,
+				"file" : 16,
+				"line" : 55,
+				"parent" : 52
+			},
+			{
+				"file" : 15,
+				"parent" : 53
+			},
+			{
+				"command" : 7,
+				"file" : 15,
+				"line" : 61,
+				"parent" : 54
+			},
+			{
+				"command" : 7,
+				"file" : 15,
+				"line" : 83,
+				"parent" : 54
+			},
+			{
+				"command" : 8,
+				"file" : 12,
+				"line" : 43,
+				"parent" : 30
+			},
+			{
+				"file" : 20,
+				"parent" : 57
+			},
+			{
+				"command" : 12,
+				"file" : 20,
+				"line" : 45,
+				"parent" : 58
+			},
+			{
+				"command" : 11,
+				"file" : 9,
+				"line" : 142,
+				"parent" : 59
+			},
+			{
+				"command" : 10,
+				"file" : 8,
+				"line" : 76,
+				"parent" : 60
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 896,
+				"parent" : 61
+			},
+			{
+				"command" : 10,
+				"file" : 5,
+				"line" : 315,
+				"parent" : 62
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 896,
+				"parent" : 63
+			},
+			{
+				"file" : 19,
+				"parent" : 64
+			},
+			{
+				"command" : 8,
+				"file" : 19,
+				"line" : 55,
+				"parent" : 65
+			},
+			{
+				"file" : 18,
+				"parent" : 66
+			},
+			{
+				"command" : 7,
+				"file" : 18,
+				"line" : 61,
+				"parent" : 67
+			},
+			{
+				"command" : 13,
+				"file" : 2,
+				"line" : 77,
 				"parent" : 0
 			}
 		]
@@ -380,59 +455,59 @@
 			"defines" : 
 			[
 				{
-					"backtrace" : 57,
+					"backtrace" : 69,
 					"define" : "HAVE_FFMPEG=0"
 				},
 				{
-					"backtrace" : 28,
+					"backtrace" : 34,
 					"define" : "MINGW_HAS_SECURE_API=1"
 				},
 				{
-					"backtrace" : 28,
+					"backtrace" : 34,
 					"define" : "QT_CORE_LIB"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"define" : "QT_GUI_LIB"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"define" : "QT_MULTIMEDIA_LIB"
 				},
 				{
-					"backtrace" : 28,
+					"backtrace" : 34,
 					"define" : "QT_NEEDS_QMAIN"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"define" : "QT_NETWORK_LIB"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"define" : "QT_WIDGETS_LIB"
 				},
 				{
-					"backtrace" : 28,
+					"backtrace" : 34,
 					"define" : "UNICODE"
 				},
 				{
-					"backtrace" : 28,
+					"backtrace" : 34,
 					"define" : "WIN32"
 				},
 				{
-					"backtrace" : 28,
+					"backtrace" : 34,
 					"define" : "WIN64"
 				},
 				{
-					"backtrace" : 28,
+					"backtrace" : 34,
 					"define" : "_ENABLE_EXTENDED_ALIGNED_STORAGE"
 				},
 				{
-					"backtrace" : 28,
+					"backtrace" : 34,
 					"define" : "_UNICODE"
 				},
 				{
-					"backtrace" : 28,
+					"backtrace" : 34,
 					"define" : "_WIN64"
 				}
 			],
@@ -443,37 +518,37 @@
 					"path" : "C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Music_App_autogen/include"
 				},
 				{
-					"backtrace" : 28,
+					"backtrace" : 34,
 					"isSystem" : true,
 					"path" : "C:/Qt/6.9.2/mingw_64/include/QtCore"
 				},
 				{
-					"backtrace" : 28,
+					"backtrace" : 34,
 					"isSystem" : true,
 					"path" : "C:/Qt/6.9.2/mingw_64/include"
 				},
 				{
-					"backtrace" : 28,
+					"backtrace" : 34,
 					"isSystem" : true,
 					"path" : "C:/Qt/6.9.2/mingw_64/mkspecs/win32-g++"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"isSystem" : true,
 					"path" : "C:/Qt/6.9.2/mingw_64/include/QtWidgets"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"isSystem" : true,
 					"path" : "C:/Qt/6.9.2/mingw_64/include/QtGui"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"isSystem" : true,
 					"path" : "C:/Qt/6.9.2/mingw_64/include/QtMultimedia"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"isSystem" : true,
 					"path" : "C:/Qt/6.9.2/mingw_64/include/QtNetwork"
 				}
@@ -483,8 +558,8 @@
 			{
 				"backtraces" : 
 				[
-					28,
-					28
+					34,
+					34
 				],
 				"standard" : "17"
 			},
@@ -498,18 +573,19 @@
 				10,
 				12,
 				14,
-				16
+				16,
+				18
 			]
 		}
 	],
 	"dependencies" : 
 	[
 		{
-			"id" : "Music_App_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
-		},
-		{
 			"backtrace" : 0,
 			"id" : "Music_App_autogen::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "Music_App_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "Music_App::@6890427a1f51a3e7e1df",
@@ -518,7 +594,7 @@
 		"destinations" : 
 		[
 			{
-				"backtrace" : 5,
+				"backtrace" : 6,
 				"path" : "bin"
 			}
 		],
@@ -540,77 +616,77 @@
 				"role" : "flags"
 			},
 			{
-				"backtrace" : 6,
+				"backtrace" : 7,
 				"fragment" : "C:\\Qt\\6.9.2\\mingw_64\\lib\\libQt6Widgets.a",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 6,
+				"backtrace" : 7,
 				"fragment" : "C:\\Qt\\6.9.2\\mingw_64\\lib\\libQt6Multimedia.a",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 12,
+				"backtrace" : 15,
 				"fragment" : "C:\\Qt\\6.9.2\\mingw_64\\lib\\libQt6Gui.a",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 22,
+				"backtrace" : 27,
 				"fragment" : "-ld3d11",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 22,
+				"backtrace" : 27,
 				"fragment" : "-ldxgi",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 22,
+				"backtrace" : 27,
 				"fragment" : "-ldxguid",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 22,
+				"backtrace" : 27,
 				"fragment" : "-ld3d12",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 27,
+				"backtrace" : 33,
 				"fragment" : "C:\\Qt\\6.9.2\\mingw_64\\lib\\libQt6Network.a",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 28,
+				"backtrace" : 34,
 				"fragment" : "C:\\Qt\\6.9.2\\mingw_64\\lib\\libQt6Core.a",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 35,
+				"backtrace" : 43,
 				"fragment" : "-lmpr",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 35,
+				"backtrace" : 43,
 				"fragment" : "-luserenv",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 45,
+				"backtrace" : 55,
 				"fragment" : "-lmingw32",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 45,
+				"backtrace" : 55,
 				"fragment" : "C:\\Qt\\6.9.2\\mingw_64\\lib\\libQt6EntryPoint.a",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 46,
+				"backtrace" : 56,
 				"fragment" : "-lshell32",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 56,
+				"backtrace" : 68,
 				"fragment" : "-lws2_32",
 				"role" : "libraries"
 			},
@@ -642,7 +718,8 @@
 				10,
 				12,
 				14,
-				16
+				16,
+				18
 			]
 		},
 		{
@@ -657,7 +734,8 @@
 				13,
 				15,
 				17,
-				18
+				19,
+				20
 			]
 		},
 		{
@@ -671,14 +749,14 @@
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				19
+				21
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				20
+				22
 			]
 		}
 	],
@@ -692,95 +770,106 @@
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 4,
+			"backtrace" : 5,
 			"compileGroupIndex" : 0,
 			"path" : "src/main.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 4,
+			"backtrace" : 5,
 			"compileGroupIndex" : 0,
 			"path" : "src/mainwindow.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 4,
+			"backtrace" : 5,
 			"path" : "src/mainwindow.h",
 			"sourceGroupIndex" : 1
 		},
 		{
-			"backtrace" : 4,
+			"backtrace" : 5,
 			"path" : "src/mainwindow.ui",
 			"sourceGroupIndex" : 2
 		},
 		{
-			"backtrace" : 4,
+			"backtrace" : 5,
 			"compileGroupIndex" : 0,
 			"path" : "src/appconfig.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 4,
+			"backtrace" : 5,
 			"path" : "src/appconfig.h",
 			"sourceGroupIndex" : 1
 		},
 		{
-			"backtrace" : 4,
+			"backtrace" : 5,
 			"path" : "src/audioerror.h",
 			"sourceGroupIndex" : 1
 		},
 		{
-			"backtrace" : 4,
+			"backtrace" : 5,
+			"compileGroupIndex" : 0,
+			"path" : "src/audioengine.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 5,
+			"path" : "src/audioengine.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 5,
 			"compileGroupIndex" : 0,
 			"path" : "src/transportdock.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 4,
+			"backtrace" : 5,
 			"path" : "src/transportdock.h",
 			"sourceGroupIndex" : 1
 		},
 		{
-			"backtrace" : 4,
+			"backtrace" : 5,
 			"compileGroupIndex" : 0,
 			"path" : "timelinewidget/timelinewidget.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 4,
+			"backtrace" : 5,
 			"path" : "timelinewidget/timelinewidget.h",
 			"sourceGroupIndex" : 1
 		},
 		{
-			"backtrace" : 4,
+			"backtrace" : 5,
 			"compileGroupIndex" : 0,
 			"path" : "timelinewidget/audioitem.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 4,
+			"backtrace" : 5,
 			"path" : "timelinewidget/audioitem.h",
 			"sourceGroupIndex" : 1
 		},
 		{
-			"backtrace" : 4,
+			"backtrace" : 5,
 			"compileGroupIndex" : 0,
 			"path" : "timelinewidget/track.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 4,
+			"backtrace" : 5,
 			"path" : "timelinewidget/track.h",
 			"sourceGroupIndex" : 1
 		},
 		{
-			"backtrace" : 4,
+			"backtrace" : 5,
 			"compileGroupIndex" : 0,
 			"path" : "timelinewidget/TimelineIndicator.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 4,
+			"backtrace" : 5,
 			"path" : "timelinewidget/TimelineIndicator.h",
 			"sourceGroupIndex" : 1
 		},

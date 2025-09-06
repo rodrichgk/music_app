@@ -142,11 +142,20 @@ AudioResult AudioItem::processAudioFile(const QString &filePath) {
         return AudioResult::error(AudioError::MemoryError, "Could not allocate resampler context");
     }
 
-    av_opt_set_int(swrContext, "in_channel_layout", codecContext->channel_layout, 0);
+    // Handle FFmpeg API changes for channel layout
+    #if LIBAVUTIL_VERSION_INT >= AV_VERSION_INT(57, 28, 100)
+        // New API (FFmpeg 5.0+)
+        av_opt_set_chlayout(swrContext, "in_chlayout", &codecContext->ch_layout, 0);
+        AVChannelLayout mono_layout = AV_CHANNEL_LAYOUT_MONO;
+        av_opt_set_chlayout(swrContext, "out_chlayout", &mono_layout, 0);
+    #else
+        // Old API (FFmpeg 4.x)
+        av_opt_set_int(swrContext, "in_channel_layout", codecContext->channel_layout, 0);
+        av_opt_set_int(swrContext, "out_channel_layout", AV_CH_LAYOUT_MONO, 0);
+    #endif
+    
     av_opt_set_int(swrContext, "in_sample_rate", codecContext->sample_rate, 0);
     av_opt_set_sample_fmt(swrContext, "in_sample_fmt", codecContext->sample_fmt, 0);
-
-    av_opt_set_int(swrContext, "out_channel_layout", AV_CH_LAYOUT_MONO, 0);  // For mono output
     av_opt_set_int(swrContext, "out_sample_rate", codecContext->sample_rate, 0);
     av_opt_set_sample_fmt(swrContext, "out_sample_fmt", AV_SAMPLE_FMT_FLT, 0);
 
@@ -185,8 +194,8 @@ AudioResult AudioItem::processAudioFile(const QString &filePath) {
 
                     int samplesCount = swr_convert(swrContext, (uint8_t **)&convertedSamples, outSamples, (const uint8_t **)frame->data, frame->nb_samples);
                     
-                    // Downsample for visualization - take every Nth sample to reduce data
-                    int downsampleFactor = qMax(1, samplesCount / 2000); // Target ~2000 samples for better detail
+                    // Aggressive downsampling for performance - target ~200 samples max
+                    int downsampleFactor = qMax(1, samplesCount / 200); // Much less detail for 60fps performance
                     for (int i = 0; i < samplesCount; i += downsampleFactor) {
                         m_waveform.push_back(convertedSamples[i]);
                     }
@@ -267,17 +276,21 @@ void AudioItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         qreal height = roundedRect.height();
         qreal centerY = roundedRect.top() + height / 2;
 
-        qDebug() << "Drawing waveform - width:" << width << "height:" << height << "centerY:" << centerY;
-        qDebug() << "Waveform samples:" << m_waveform.size();
+        // Remove debug output for performance
+        // qDebug() << "Drawing waveform - width:" << width << "height:" << height << "centerY:" << centerY;
+        // qDebug() << "Waveform samples:" << m_waveform.size();
 
-        // Draw waveform as vertical lines from center (more typical audio visualization)
-        qreal step = width / m_waveform.size();
-        for (size_t i = 0; i < m_waveform.size(); ++i) {
+        // Optimized waveform rendering - draw fewer lines for performance
+        int maxLines = qMin(static_cast<int>(width / 2), 100); // Max 100 lines or 1 line per 2 pixels
+        qreal step = width / maxLines;
+        int sampleStep = qMax(1, static_cast<int>(m_waveform.size()) / maxLines);
+        
+        for (int i = 0; i < maxLines && i * sampleStep < static_cast<int>(m_waveform.size()); ++i) {
             qreal x = roundedRect.left() + i * step;
-            qreal amplitude = m_waveform[i];
+            qreal amplitude = m_waveform[i * sampleStep];
             
             // Scale amplitude to use more of the available height
-            qreal scaledAmplitude = amplitude * (height * 0.4); // Use 40% of height for each direction
+            qreal scaledAmplitude = amplitude * (height * 0.3); // Use 30% of height for each direction
             
             // Draw vertical line from center
             qreal y1 = centerY - scaledAmplitude;
@@ -285,10 +298,10 @@ void AudioItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
             
             painter->drawLine(QPointF(x, y1), QPointF(x, y2));
             
-            // Debug first few samples
-            if (i < 5) {
-                qDebug() << "Sample" << i << ": amplitude=" << amplitude << "scaledAmplitude=" << scaledAmplitude << "y1=" << y1 << "y2=" << y2;
-            }
+            // Remove debug output for performance
+            // if (i < 5) {
+            //     qDebug() << "Sample" << i << ": amplitude=" << amplitude << "scaledAmplitude=" << scaledAmplitude << "y1=" << y1 << "y2=" << y2;
+            // }
         }
         
         qDebug() << "Waveform drawing completed";
@@ -307,16 +320,22 @@ QVariant AudioItem::itemChange(GraphicsItemChange change, const QVariant &value)
         QPointF newPos = value.toPointF();
         qreal x = newPos.x();
         qreal y = newPos.y();
-        qreal minX = -m_startTime; // Minimum x-coordinate is 0
-        qreal minY = -m_trackHeight * m_trackNumber; // Minimum y-coordinate
-        minY += boundingRect().height(); // Adjust minY by adding the height of the audio item
-
+        
         // Restrict the x-coordinate to 0 (left boundary)
+        qreal minX = -m_startTime;
         x = qMax(x, minX);
-        // Restrict the y-coordinate to the minimum value
-        y = qMax(y, minY);
+        
+        // Only restrict to not go above time indicator area
+        y = qMax(y, static_cast<qreal>(m_timeIndicatorHeight));
+        
+        // Snap to track boundaries during movement
+        if (m_timeIndicatorHeight > 0 && m_trackHeight > 0) {
+            qreal trackAreaY = y - m_timeIndicatorHeight;
+            int targetTrack = qRound(trackAreaY / m_trackHeight);
+            targetTrack = qMax(0, targetTrack); // Don't go to negative tracks
+            y = m_timeIndicatorHeight + (targetTrack * m_trackHeight);
+        }
 
-        // Call the base class implementation to handle other changes
         return QPointF(x, y);
     }
     return QGraphicsItem::itemChange(change, value);
@@ -326,17 +345,44 @@ QVariant AudioItem::itemChange(GraphicsItemChange change, const QVariant &value)
 
 void AudioItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    qDebug() << "\n=== MOUSE PRESS EVENT ===";
+    qDebug() << "Mouse press at scene position:" << event->scenePos();
+    qDebug() << "Item position before press:" << pos();
+    qDebug() << "Item scene position before press:" << scenePos();
+    qDebug() << "Item bounding rect:" << boundingRect();
+    qDebug() << "Current track number:" << m_trackNumber;
+    
     // Capture the initial scene position of the item
     m_initialPos = scenePos();
     // Record the scene position where the mouse was pressed
     m_pressPos = event->scenePos();
     QGraphicsItem::mousePressEvent(event);
     emit currentItem(this);
+    
+    qDebug() << "=== END MOUSE PRESS ===\n";
 }
 
 void AudioItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
+    // Log every 10th move event to avoid spam
+    static int moveCounter = 0;
+    moveCounter++;
+    
+    if (moveCounter % 10 == 0) {
+        qDebug() << "=== MOUSE MOVE EVENT #" << moveCounter << "===";
+        qDebug() << "Mouse scene position:" << event->scenePos();
+        qDebug() << "Item position before move:" << pos();
+        qDebug() << "Item scene position before move:" << scenePos();
+    }
+    
     QGraphicsItem::mouseMoveEvent(event);
+    
+    if (moveCounter % 10 == 0) {
+        qDebug() << "Item position after move:" << pos();
+        qDebug() << "Item scene position after move:" << scenePos();
+        qDebug() << "=== END MOUSE MOVE #" << moveCounter << "===\n";
+    }
+    
     if(this->pos().x()<0)
     {
         setPos(0,pos().y());
@@ -347,51 +393,91 @@ void AudioItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void AudioItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+    qDebug() << "\n=== MOUSE RELEASE EVENT - DETAILED ANALYSIS ===";
+    
     QGraphicsItem::mouseReleaseEvent(event);
     
-    // Get current scene position
+    // Get all position information
+    QPointF currentPos = pos();
     QPointF currentScenePos = scenePos();
+    QRectF itemRect = boundingRect();
+    
+    qDebug() << "CURRENT POSITIONS:";
+    qDebug() << "  - Item pos():" << currentPos;
+    qDebug() << "  - Item scenePos():" << currentScenePos;
+    qDebug() << "  - Mouse release scene pos:" << event->scenePos();
+    qDebug() << "  - Item bounding rect:" << itemRect;
+    qDebug() << "  - Item height:" << itemRect.height();
+    qDebug() << "  - Current track number:" << m_trackNumber;
+    
+    // Use scene position for calculations (more reliable)
     qreal currentY = currentScenePos.y();
+    qreal itemTop = currentY;
+    qreal itemBottom = currentY + itemRect.height();
+    qreal itemCenterY = currentY + (itemRect.height() / 2);
     
-    qDebug() << "AudioItem mouse release - current Y:" << currentY << "track height:" << m_trackHeight;
+    qDebug() << "ITEM BOUNDARIES:";
+    qDebug() << "  - Item top Y:" << itemTop;
+    qDebug() << "  - Item center Y:" << itemCenterY;
+    qDebug() << "  - Item bottom Y:" << itemBottom;
     
-    // Calculate which track this item is mostly in
-    // Account for time indicator height offset
-    qreal adjustedY = currentY - 25; // Assuming time indicator height is around 25px
-    int targetTrackIndex = qMax(0, static_cast<int>(adjustedY / m_trackHeight));
+    // Get timeline measurements (we need to access these from parent somehow)
+    // For now, use hardcoded values but log them clearly
+    qreal timeIndicatorHeight = 25.0; // This should come from timeline
+    qreal trackHeight = m_trackHeight;
     
-    // Check if more than 50% of the item is in the new track
-    qreal itemCenterY = currentY + (m_trackHeight / 2);
-    qreal trackCenterY = 25 + (targetTrackIndex * m_trackHeight) + (m_trackHeight / 2);
+    qDebug() << "TIMELINE MEASUREMENTS:";
+    qDebug() << "  - Time indicator height:" << timeIndicatorHeight;
+    qDebug() << "  - Track height:" << trackHeight;
     
-    qreal overlapAmount = qAbs(itemCenterY - trackCenterY);
-    bool shouldSnapToTrack = overlapAmount < (m_trackHeight / 2);
-    
-    qDebug() << "Target track index:" << targetTrackIndex;
-    qDebug() << "Item center Y:" << itemCenterY << "Track center Y:" << trackCenterY;
-    qDebug() << "Overlap amount:" << overlapAmount << "Should snap:" << shouldSnapToTrack;
-    
-    if (shouldSnapToTrack) {
-        // Snap to the target track
-        qreal newY = 25 + (targetTrackIndex * m_trackHeight); // 25 is time indicator height
-        QPointF newPos(pos().x(), newY);
+    // Calculate which tracks the item overlaps
+    qDebug() << "TRACK OVERLAP ANALYSIS:";
+    for (int trackIdx = 0; trackIdx < 10; ++trackIdx) { // Check first 10 tracks
+        qreal trackStartY = timeIndicatorHeight + (trackIdx * trackHeight);
+        qreal trackEndY = trackStartY + trackHeight;
+        qreal trackCenterY = trackStartY + (trackHeight / 2);
         
-        qDebug() << "Snapping to track" << targetTrackIndex << "at Y position:" << newY;
-        setPos(newPos);
+        // Calculate overlap
+        qreal overlapStart = qMax(itemTop, trackStartY);
+        qreal overlapEnd = qMin(itemBottom, trackEndY);
+        qreal overlapHeight = qMax(0.0, overlapEnd - overlapStart);
+        qreal overlapPercentage = (overlapHeight / itemRect.height()) * 100.0;
         
-        // Update track number
-        m_trackNumber = targetTrackIndex;
-    } else {
-        qDebug() << "Not snapping - insufficient overlap";
+        qDebug() << "  Track" << trackIdx << ":";
+        qDebug() << "    - Track Y range:" << trackStartY << "to" << trackEndY << "(center:" << trackCenterY << ")";
+        qDebug() << "    - Overlap height:" << overlapHeight << "(" << overlapPercentage << "%)";
+        
+        if (overlapPercentage > 50.0) {
+            qDebug() << "    *** MAJORITY OVERLAP - SHOULD SNAP TO THIS TRACK ***";
+            
+            // Snap to this track
+            qreal newY = trackStartY;
+            QPointF newPos(currentPos.x(), newY);
+            
+            qDebug() << "SNAPPING ACTION:";
+            qDebug() << "  - Snapping to track" << trackIdx;
+            qDebug() << "  - New position:" << newPos;
+            qDebug() << "  - Old track number:" << m_trackNumber << "-> New track number:" << trackIdx;
+            
+            setPos(newPos);
+            m_trackNumber = trackIdx;
+            break;
+        }
     }
     
     // Ensure X position doesn't go negative
     if (pos().x() < 0) {
+        qDebug() << "CORRECTING NEGATIVE X POSITION";
         setPos(0, pos().y());
     }
     
+    qDebug() << "FINAL POSITION:" << pos();
+    qDebug() << "FINAL SCENE POSITION:" << scenePos();
+    
     setStartTime(pos().x());
     emit positionChanged(pos());
+    
+    qDebug() << "=== END MOUSE RELEASE EVENT ===\n";
 }
 
 
