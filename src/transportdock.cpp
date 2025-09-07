@@ -424,7 +424,13 @@ void TransportDock::setPosition(double seconds) {
 
 void TransportDock::onPositionSliderChanged(int value) {
     double seconds = value / 100.0; // Convert from slider scale
-    setPosition(seconds);
+    
+    // Update internal state without emitting positionChanged signal
+    m_currentPosition = seconds;
+    updateTimeDisplay();
+    
+    // Emit the signal that directly updates timeline (same as spacebar/play button)
+    emit positionChanged(seconds);
 }
 
 int TransportDock::getBPM() const {

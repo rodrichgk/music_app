@@ -434,6 +434,18 @@
 			null
 		],
 		[
+			"C:/Users/kibar/Documents/music_app/src/audioiodevice.h",
+			"MU",
+			"UVLADIE3JM/moc_audioiodevice.cpp",
+			null
+		],
+		[
+			"C:/Users/kibar/Documents/music_app/src/ffmpegaudioengine.h",
+			"MU",
+			"UVLADIE3JM/moc_ffmpegaudioengine.cpp",
+			null
+		],
+		[
 			"C:/Users/kibar/Documents/music_app/src/mainwindow.h",
 			"MU",
 			"UVLADIE3JM/moc_mainwindow.cpp",
@@ -549,6 +561,16 @@
 	[
 		[ "C:/Users/kibar/Documents/music_app/src/appconfig.cpp", "MU", null ],
 		[ "C:/Users/kibar/Documents/music_app/src/audioengine.cpp", "MU", null ],
+		[
+			"C:/Users/kibar/Documents/music_app/src/audioiodevice.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/kibar/Documents/music_app/src/ffmpegaudioengine.cpp",
+			"MU",
+			null
+		],
 		[ "C:/Users/kibar/Documents/music_app/src/main.cpp", "MU", null ],
 		[ "C:/Users/kibar/Documents/music_app/src/mainwindow.cpp", "MU", null ],
 		[

@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "ffmpegaudioengine.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -44,6 +45,6 @@ private:
     Ui::MainWindow *ui;
     TransportDock *m_transportDock;
     TimelineWidget *m_timelineWidget;
-    AudioEngine *m_audioEngine;
+    FFmpegAudioEngine *m_audioEngine;
 };
 #endif // MAINWINDOW_H

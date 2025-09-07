@@ -6,6 +6,8 @@
 #include <QGraphicsRectItem>
 #include <QColor>
 #include <QBrush>
+#include <QMenu>
+#include <QAction>
 #include <vector>
 #include "../src/audioerror.h"
 
@@ -73,6 +75,10 @@ signals:
     void positionChanged(const QPointF& newPosition);
     void itemMoved(AudioItem* item);
     void currentItem(AudioItem* item);
+    void removeRequested(AudioItem* item);
+
+private slots:
+    void showContextMenu(const QPoint& globalPos);
 
 };
 

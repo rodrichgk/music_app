@@ -1692,24 +1692,6 @@
 			"path" : "C:/Qt/6.9.2/mingw_64/lib/cmake/Qt6/Qt6Dependencies.cmake"
 		},
 		{
-			"isExternal" : true,
-			"path" : "C:/vcpkg/installed/x64-mingw-dynamic/share/ffmpeg/vcpkg-cmake-wrapper.cmake"
-		},
-		{
-			"isExternal" : true,
-			"path" : "C:/vcpkg/installed/x64-mingw-dynamic/share/ffmpeg/vcpkg-cmake-wrapper.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/SelectLibraryConfigurations.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/SelectLibraryConfigurations.cmake"
-		},
-		{
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/GNUInstallDirs.cmake"

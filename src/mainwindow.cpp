@@ -2,7 +2,7 @@
 #include "./ui_mainwindow.h"
 #include "../timelinewidget/timelinewidget.h"
 #include "transportdock.h"
-#include "audioengine.h"
+#include "ffmpegaudioengine.h"
 #include <QBoxLayout>
 #include <QDateTime>
 #include <QDebug>
@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     // Create the audio engine first
-    m_audioEngine = new AudioEngine(this);
+    m_audioEngine = new FFmpegAudioEngine(this);
     
     // Create the transport dock
     m_transportDock = new TransportDock(this);
@@ -53,14 +53,16 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_transportDock, &TransportDock::loadAudioFileRequested, this, &MainWindow::onLoadAudioFileRequested);
     
     // Connect audio engine to transport dock
-    connect(m_transportDock, &TransportDock::playRequested, m_audioEngine, &AudioEngine::onTransportPlay);
-    connect(m_transportDock, &TransportDock::stopRequested, m_audioEngine, &AudioEngine::onTransportStop);
-    connect(m_transportDock, &TransportDock::stopAndReturnRequested, m_audioEngine, &AudioEngine::onTransportStopAndReturn);
-    connect(m_transportDock, &TransportDock::positionChanged, m_audioEngine, &AudioEngine::onPositionChanged);
+    connect(m_transportDock, &TransportDock::playRequested, m_audioEngine, &FFmpegAudioEngine::onTransportPlay);
+    connect(m_transportDock, &TransportDock::stopRequested, m_audioEngine, &FFmpegAudioEngine::onTransportStop);
+    connect(m_transportDock, &TransportDock::stopAndReturnRequested, m_audioEngine, &FFmpegAudioEngine::onTransportStopAndReturn);
+    connect(m_transportDock, &TransportDock::positionChanged, m_audioEngine, &FFmpegAudioEngine::onPositionChanged);
     
-    // Connect audio engine to UI components
-    connect(m_audioEngine, &AudioEngine::positionChanged, this, &MainWindow::onAudioEnginePositionChanged);
-    connect(m_audioEngine, &AudioEngine::playbackStateChanged, this, &MainWindow::onAudioEnginePlaybackStateChanged);
+    // Connect audio engine playback state to timeline widget
+    connect(m_audioEngine, &FFmpegAudioEngine::playbackStateChanged, m_timelineWidget, &TimelineWidget::setPlaybackMode);
+    
+    // Connect audio engine to UI components (removed position connection to break feedback loop)
+    connect(m_audioEngine, &FFmpegAudioEngine::playbackStateChanged, this, &MainWindow::onAudioEnginePlaybackStateChanged);
     
     // Connect timeline and transport dock for position synchronization
     // Use Qt::QueuedConnection to prevent signal loops and crashes
@@ -69,8 +71,12 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_transportDock, &TransportDock::positionChanged, 
             m_timelineWidget, &TimelineWidget::setIndicatorPosition, Qt::QueuedConnection);
     
+    // Connect audio engine position directly to transport dock (bypass MainWindow)
+    connect(m_audioEngine, &FFmpegAudioEngine::positionChanged,
+            m_transportDock, &TransportDock::setPosition, Qt::QueuedConnection);
+    
     // Connect audio engine position to timeline
-    connect(m_audioEngine, &AudioEngine::positionChanged,
+    connect(m_audioEngine, &FFmpegAudioEngine::positionChanged,
             m_timelineWidget, &TimelineWidget::setIndicatorPosition, Qt::QueuedConnection);
     
     // Setup menu bar
@@ -89,12 +95,16 @@ MainWindow::~MainWindow()
 void MainWindow::onPlayRequested()
 {
     qDebug() << "Play requested - delegating to audio engine";
+    // Start timeline movement directly like spacebar does
+    m_timelineWidget->startTimelineMovement();
     // Audio engine handles this via direct connection
 }
 
 void MainWindow::onStopRequested()
 {
     qDebug() << "Stop requested - delegating to audio engine";
+    // Stop timeline movement directly like spacebar does
+    m_timelineWidget->stopTimelineMovement();
     // Audio engine handles this via direct connection
 }
 
@@ -162,8 +172,8 @@ void MainWindow::onAudioEnginePositionChanged(double seconds)
 {
     // Update transport dock position display
     m_transportDock->setPosition(seconds);
-    qDebug() << "Audio engine position changed to:" << seconds << "seconds";
 }
+
 
 void MainWindow::onAudioEnginePlaybackStateChanged(bool isPlaying)
 {

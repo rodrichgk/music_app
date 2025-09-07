@@ -2,10 +2,23 @@
 #define AUDIOENGINE_H
 
 #include <QObject>
+#include <QTimer>
+#include <QMutex>
+#include <QAudioFormat>
+#include <QAudioSink>
+#include <QIODevice>
 #include <QMediaPlayer>
 #include <QAudioOutput>
-#include <QTimer>
 #include <QUrl>
+
+#if HAVE_FFMPEG
+extern "C" {
+#include <libavformat/avformat.h>
+#include <libavcodec/avcodec.h>
+#include <libswresample/swresample.h>
+#include <libavutil/avutil.h>
+}
+#endif
 #include <QList>
 #include <QMutex>
 #include "audioerror.h"
@@ -76,9 +89,19 @@ private:
     double msToSeconds(qint64 ms) const;
     qint64 secondsToMs(double seconds) const;
 
+    // Legacy Qt Multimedia (to be removed)
     QMediaPlayer* m_mediaPlayer;
     QAudioOutput* m_audioOutput;
+    QAudioSink* m_audioSink;
+    QIODevice* m_audioBuffer;
     QTimer* m_positionTimer;
+    
+#if HAVE_FFMPEG
+    AVFormatContext* m_formatContext;
+    AVCodecContext* m_codecContext;
+    SwrContext* m_swrContext;
+    int m_audioStreamIndex;
+#endif
     
     // Audio state
     bool m_isPlaying;

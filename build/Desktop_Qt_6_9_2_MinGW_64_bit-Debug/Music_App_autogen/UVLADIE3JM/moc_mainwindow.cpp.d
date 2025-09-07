@@ -1,5 +1,12 @@
 C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Music_App_autogen/UVLADIE3JM/moc_mainwindow.cpp: C:/Users/kibar/Documents/music_app/src/mainwindow.h \
   C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Music_App_autogen/moc_predefs.h \
+  C:/Qt/6.9.2/mingw_64/include/QtCore/QBuffer \
+  C:/Qt/6.9.2/mingw_64/include/QtCore/QByteArray \
+  C:/Qt/6.9.2/mingw_64/include/QtCore/QIODevice \
+  C:/Qt/6.9.2/mingw_64/include/QtCore/QMutex \
+  C:/Qt/6.9.2/mingw_64/include/QtCore/QObject \
+  C:/Qt/6.9.2/mingw_64/include/QtCore/QString \
+  C:/Qt/6.9.2/mingw_64/include/QtCore/QTimer \
   C:/Qt/6.9.2/mingw_64/include/QtCore/q17memory.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/q20functional.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/q20iterator.h \
@@ -7,6 +14,7 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtCore/q20type_traits.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/q20utility.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/q23utility.h \
+  C:/Qt/6.9.2/mingw_64/include/QtCore/qabstracteventdispatcher.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qalgorithms.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qanystringview.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qarraydata.h \
@@ -16,7 +24,9 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtCore/qatomic.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qatomic_cxx11.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qbasicatomic.h \
+  C:/Qt/6.9.2/mingw_64/include/QtCore/qbasictimer.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qbindingstorage.h \
+  C:/Qt/6.9.2/mingw_64/include/QtCore/qbuffer.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qbytearray.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qbytearrayalgorithms.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qbytearraylist.h \
@@ -34,8 +44,11 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtCore/qcontiguouscache.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qdarwinhelpers.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qdatastream.h \
+  C:/Qt/6.9.2/mingw_64/include/QtCore/qdeadlinetimer.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qdebug.h \
+  C:/Qt/6.9.2/mingw_64/include/QtCore/qelapsedtimer.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qendian.h \
+  C:/Qt/6.9.2/mingw_64/include/QtCore/qeventloop.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qexceptionhandling.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qflags.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qfloat16.h \
@@ -47,6 +60,7 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtCore/qglobalstatic.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qhash.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qhashfunctions.h \
+  C:/Qt/6.9.2/mingw_64/include/QtCore/qiodevice.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qiodevicebase.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qiterable.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qiterator.h \
@@ -61,6 +75,7 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtCore/qmetacontainer.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qmetatype.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qminmax.h \
+  C:/Qt/6.9.2/mingw_64/include/QtCore/qmutex.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qnamespace.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qnumeric.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qobject.h \
@@ -109,10 +124,12 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtCore/qtenvironmentvariables.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qtextstream.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qtformat_impl.h \
+  C:/Qt/6.9.2/mingw_64/include/QtCore/qtimer.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qtmetamacros.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qtnoop.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qtpreprocessorsupport.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qtresource.h \
+  C:/Qt/6.9.2/mingw_64/include/QtCore/qtsan_impl.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qttranslation.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qttypetraits.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qtversion.h \
@@ -151,6 +168,16 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtGui/qtransform.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qwindowdefs_win.h \
+  C:/Qt/6.9.2/mingw_64/include/QtMultimedia/QAudioFormat \
+  C:/Qt/6.9.2/mingw_64/include/QtMultimedia/QAudioSink \
+  C:/Qt/6.9.2/mingw_64/include/QtMultimedia/qaudio.h \
+  C:/Qt/6.9.2/mingw_64/include/QtMultimedia/qaudiodevice.h \
+  C:/Qt/6.9.2/mingw_64/include/QtMultimedia/qaudioformat.h \
+  C:/Qt/6.9.2/mingw_64/include/QtMultimedia/qaudiosink.h \
+  C:/Qt/6.9.2/mingw_64/include/QtMultimedia/qtaudio.h \
+  C:/Qt/6.9.2/mingw_64/include/QtMultimedia/qtmultimedia-config.h \
+  C:/Qt/6.9.2/mingw_64/include/QtMultimedia/qtmultimediaexports.h \
+  C:/Qt/6.9.2/mingw_64/include/QtMultimedia/qtmultimediaglobal.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/QMainWindow \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qmainwindow.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qsizepolicy.h \
@@ -284,6 +311,7 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/limits \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/list \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/map \
+  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/math.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/memory \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/new \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/numeric \
@@ -351,6 +379,7 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/crtdefs.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/ctype.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/errno.h \
+  C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/inttypes.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/locale.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/process.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/pthread.h \
@@ -371,4 +400,41 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/sys/types.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/time.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/vadefs.h \
-  C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h
+  C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
+  C:/Users/kibar/Documents/music_app/src/audioerror.h \
+  C:/Users/kibar/Documents/music_app/src/ffmpegaudioengine.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/avcodec.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/codec.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/codec_desc.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/codec_id.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/codec_par.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/defs.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/packet.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/version.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/version_major.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavformat/avformat.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavformat/avio.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavformat/version.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavformat/version_major.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/attributes.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/avconfig.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/avutil.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/buffer.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/channel_layout.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/common.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/dict.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/error.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/frame.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/hwcontext.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/intfloat.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/log.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/macros.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/mathematics.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/mem.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/pixfmt.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/rational.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/samplefmt.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libavutil/version.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libswresample/swresample.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libswresample/version.h \
+  C:/vcpkg/installed/x64-mingw-dynamic/include/libswresample/version_major.h

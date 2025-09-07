@@ -1,10 +1,12 @@
 #include "audioitem.h"
-#include <QGraphicsSceneMouseEvent>
-#include <QGraphicsScene>
-#include <QDebug>
-#include <QPen>
 #include <QPainter>
-#include <QUrl>
+#include <QGraphicsSceneMouseEvent>
+#include <QDebug>
+#include <QFileInfo>
+#include <QMenu>
+#include <QAction>
+#include <cmath>
+#include <cstdlib>
 #include <QAudioFormat>
 #include <QFileInfo>
 #include <cmath>
@@ -345,6 +347,12 @@ QVariant AudioItem::itemChange(GraphicsItemChange change, const QVariant &value)
 
 void AudioItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    if (event->button() == Qt::RightButton) {
+        // Show context menu for right-click
+        showContextMenu(event->screenPos());
+        return;
+    }
+    
     qDebug() << "\n=== MOUSE PRESS EVENT ===";
     qDebug() << "Mouse press at scene position:" << event->scenePos();
     qDebug() << "Item position before press:" << pos();
@@ -362,9 +370,35 @@ void AudioItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     qDebug() << "=== END MOUSE PRESS ===\n";
 }
 
+void AudioItem::showContextMenu(const QPoint& globalPos) {
+    qDebug() << "=== SHOWING CONTEXT MENU - DEEP DEBUG ===";
+    qDebug() << "Item requesting context menu:" << (void*)this;
+    qDebug() << "Item track number:" << m_trackNumber;
+    qDebug() << "Item position:" << pos();
+    qDebug() << "Item scene:" << (void*)scene();
+    qDebug() << "Item parent:" << (void*)parentItem();
+    
+    QMenu contextMenu;
+    
+    QAction* removeAction = contextMenu.addAction("Remove Audio Track");
+    removeAction->setIcon(QIcon(":/icons/delete")); // Optional icon
+    
+    qDebug() << "Context menu created, executing...";
+    QAction* selectedAction = contextMenu.exec(globalPos);
+    
+    if (selectedAction == removeAction) {
+        qDebug() << "Remove action selected, emitting removeRequested signal...";
+        emit removeRequested(this);
+        qDebug() << "removeRequested signal emitted";
+    } else {
+        qDebug() << "No action selected or different action selected";
+    }
+    
+    qDebug() << "=== CONTEXT MENU COMPLETE - DEEP DEBUG ===";
+}
+
 void AudioItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    // Log every 10th move event to avoid spam
     static int moveCounter = 0;
     moveCounter++;
     
@@ -503,6 +537,10 @@ void AudioItem::setTrackNumber(int trackNumber) {
     m_trackNumber = trackNumber;
 }
 
+int AudioItem::trackNumber() const {
+    return m_trackNumber;
+}
+
 void AudioItem::setColor(const QColor &color) {
     m_color = color;
     setBrush(color);
@@ -516,6 +554,12 @@ void AudioItem::updateGeometry(qreal startTime, qreal duration) {
     m_startTime = startTime;
     m_duration = duration;
     setColor(m_color);
-    setRect(startTime, 0, m_duration, m_trackHeight);
+    
+    // Convert duration from seconds to pixels (100 pixels = 1 second)
+    qreal widthInPixels = m_duration * 100.0;
+    
+    qDebug() << "AudioItem::updateGeometry - Duration:" << m_duration << "seconds, Width:" << widthInPixels << "pixels";
+    
+    setRect(startTime, 0, widthInPixels, m_trackHeight);
     update();
 }

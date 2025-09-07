@@ -39,6 +39,10 @@ set(PROJECT_SOURCES
     src/audioerror.h
     src/audioengine.cpp
     src/audioengine.h
+    src/ffmpegaudioengine.cpp
+    src/ffmpegaudioengine.h
+    src/audioiodevice.cpp
+    src/audioiodevice.h
     src/transportdock.cpp
     src/transportdock.h
     timelinewidget/timelinewidget.cpp

@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QMutexLocker>
+#include <QUrl>
 
 AudioEngine::AudioEngine(QObject *parent)
     : QObject(parent)
@@ -51,7 +52,15 @@ void AudioEngine::initializeAudio()
         // Create position update timer for smooth timeline sync
         m_positionTimer = new QTimer(this);
         m_positionTimer->setInterval(POSITION_UPDATE_INTERVAL_MS);
-        connect(m_positionTimer, &QTimer::timeout, this, &AudioEngine::updatePosition);
+        
+        qDebug() << "AudioEngine: Creating timer connection...";
+        bool connected = connect(m_positionTimer, &QTimer::timeout, this, &AudioEngine::updatePosition);
+        qDebug() << "AudioEngine: Timer connection successful:" << connected;
+        
+        // Test the timer connection immediately
+        connect(m_positionTimer, &QTimer::timeout, []() {
+            qDebug() << "*** TIMER TIMEOUT SIGNAL RECEIVED ***";
+        });
         
         qDebug() << "AudioEngine: Audio system initialized successfully";
     } catch (const std::exception& e) {
@@ -82,17 +91,52 @@ void AudioEngine::play()
 {
     QMutexLocker locker(&m_mutex);
     
+    qDebug() << "=== AudioEngine::play() DEBUG ===";
+    qDebug() << "m_mediaPlayer exists:" << (m_mediaPlayer != nullptr);
+    if (m_mediaPlayer) {
+        qDebug() << "m_mediaPlayer->hasAudio():" << m_mediaPlayer->hasAudio();
+        qDebug() << "m_mediaPlayer->source():" << m_mediaPlayer->source();
+        qDebug() << "m_mediaPlayer->mediaStatus():" << m_mediaPlayer->mediaStatus();
+        qDebug() << "m_mediaPlayer->playbackState():" << m_mediaPlayer->playbackState();
+    }
+    qDebug() << "=================================";
+    
     if (m_mediaPlayer && m_mediaPlayer->hasAudio()) {
         m_mediaPlayer->play();
         m_isPlaying = true;
         m_isPaused = false;
         m_positionTimer->start();
         
+        qDebug() << "AudioEngine: Position timer started with interval:" << m_positionTimer->interval() << "ms";
+        qDebug() << "AudioEngine: Position timer isActive:" << m_positionTimer->isActive();
+        
+        // Force a manual timer check
+        QTimer::singleShot(100, [this]() {
+            qDebug() << "Manual timer check - isActive:" << m_positionTimer->isActive();
+            qDebug() << "Manual timer check - interval:" << m_positionTimer->interval();
+            qDebug() << "Manual timer check - forcing updatePosition call...";
+            updatePosition();
+        });
+        
         emit playbackStateChanged(true);
         qDebug() << "AudioEngine: Started playback";
     } else {
         qDebug() << "AudioEngine: No audio loaded for playback";
-        emit audioError(AudioError::FileNotFound, "No audio file loaded");
+        if (m_mediaPlayer && !m_mediaPlayer->hasAudio()) {
+            qDebug() << "AudioEngine: Media player exists but hasAudio() returned false";
+            qDebug() << "AudioEngine: Trying to play anyway...";
+            m_mediaPlayer->play();
+            m_isPlaying = true;
+            m_isPaused = false;
+            m_positionTimer->start();
+            
+            qDebug() << "AudioEngine: Position timer started (fallback) with interval:" << m_positionTimer->interval() << "ms";
+            qDebug() << "AudioEngine: Position timer isActive (fallback):" << m_positionTimer->isActive();
+            
+            emit playbackStateChanged(true);
+        } else {
+            emit audioError(AudioError::FileNotFound, "No audio file loaded");
+        }
     }
 }
 
@@ -199,6 +243,10 @@ AudioResult AudioEngine::loadAudioFile(const QString& filePath)
     
     try {
         m_mediaPlayer->setSource(audioUrl);
+        
+        // Force immediate buffer completion for local files
+        qDebug() << "AudioEngine: Forcing buffer completion for local file...";
+        m_mediaPlayer->setPosition(0);
         
         // Reset position
         m_currentPosition = 0;
@@ -327,46 +375,73 @@ void AudioEngine::onPositionChanged(double seconds)
 // Private slots
 void AudioEngine::handleMediaPlayerPositionChanged(qint64 position)
 {
-    QMutexLocker locker(&m_mutex);
-    m_currentPosition = position;
+    // Use tryLock to prevent blocking
+    if (m_mutex.tryLock()) {
+        m_currentPosition = position;
+        m_mutex.unlock();
+    }
     // Don't emit here - let updatePosition() handle it for consistent timing
 }
 
 void AudioEngine::handleMediaPlayerStateChanged(QMediaPlayer::PlaybackState state)
 {
-    QMutexLocker locker(&m_mutex);
+    // Use tryLock to prevent blocking during state changes
+    if (!m_mutex.tryLock()) {
+        // Queue this state change for later processing
+        QTimer::singleShot(10, this, [this, state]() {
+            handleMediaPlayerStateChanged(state);
+        });
+        return;
+    }
+    
+    bool wasPlaying = m_isPlaying;
     
     switch (state) {
     case QMediaPlayer::PlayingState:
         m_isPlaying = true;
         m_isPaused = false;
-        if (!m_positionTimer->isActive()) {
+        if (m_positionTimer && !m_positionTimer->isActive()) {
             m_positionTimer->start();
         }
         break;
     case QMediaPlayer::PausedState:
         m_isPlaying = false;
         m_isPaused = true;
-        m_positionTimer->stop();
+        if (m_positionTimer) {
+            m_positionTimer->stop();
+        }
         break;
     case QMediaPlayer::StoppedState:
         m_isPlaying = false;
         m_isPaused = false;
-        m_positionTimer->stop();
+        if (m_positionTimer) {
+            m_positionTimer->stop();
+        }
         break;
     }
     
-    emit playbackStateChanged(m_isPlaying);
+    // Unlock before emitting signals
+    m_mutex.unlock();
+    
+    // Only emit if state actually changed
+    if (wasPlaying != m_isPlaying) {
+        emit playbackStateChanged(m_isPlaying);
+    }
+    
     qDebug() << "AudioEngine: Playback state changed to" << state;
 }
 
 void AudioEngine::handleMediaPlayerError(QMediaPlayer::Error error, const QString& errorString)
 {
-    QMutexLocker locker(&m_mutex);
-    
-    m_isPlaying = false;
-    m_isPaused = false;
-    m_positionTimer->stop();
+    // Use tryLock for error handling to prevent deadlocks
+    if (m_mutex.tryLock()) {
+        m_isPlaying = false;
+        m_isPaused = false;
+        if (m_positionTimer) {
+            m_positionTimer->stop();
+        }
+        m_mutex.unlock();
+    }
     
     AudioError audioError;
     switch (error) {
@@ -381,6 +456,7 @@ void AudioEngine::handleMediaPlayerError(QMediaPlayer::Error error, const QStrin
         break;
     }
     
+    // Emit signals without holding mutex
     emit this->audioError(audioError, errorString);
     emit playbackStateChanged(false);
     qDebug() << "AudioEngine: Media player error:" << errorString;
@@ -388,13 +464,23 @@ void AudioEngine::handleMediaPlayerError(QMediaPlayer::Error error, const QStrin
 
 void AudioEngine::updatePosition()
 {
-    QMutexLocker locker(&m_mutex);
-    
-    if (m_mediaPlayer && m_isPlaying) {
-        m_currentPosition = m_mediaPlayer->position();
-        double seconds = msToSeconds(m_currentPosition);
-        emit positionChanged(seconds);
+    // Don't use mutex in timer callback - just read atomic values
+    if (!m_isPlaying || !m_mediaPlayer) {
+        return;
     }
+    
+    qDebug() << "=== AudioEngine::updatePosition() CALLED (no mutex) ===";
+    
+    // Get position without locking - Qt objects are thread-safe for reading
+    qint64 currentPos = m_mediaPlayer->position();
+    double seconds = msToSeconds(currentPos);
+    
+    qDebug() << "AudioEngine::updatePosition() - Position:" << currentPos << "ms (" << seconds << "seconds)";
+    
+    // Emit position change immediately without mutex
+    emit positionChanged(seconds);
+    
+    qDebug() << "=== AudioEngine::updatePosition() END ===";
 }
 
 // Utility functions

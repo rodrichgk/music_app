@@ -1,10 +1,18 @@
 #include "timelinewidget.h"
-#include <QGraphicsRectItem>
-#include <QSplitter>
-#include <QListWidgetItem>
-#include <QRandomGenerator>
-#include <vector>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QScrollBar>
+#include <QDebug>
+#include <QKeyEvent>
 #include <QWheelEvent>
+#include <QFileInfo>
+
+#if HAVE_FFMPEG
+extern "C" {
+#include <libavformat/avformat.h>
+#include <libavutil/avutil.h>
+}
+#endif
 #include <QDebug>
 #include <QScrollBar>
 #include <QPoint>
@@ -73,10 +81,21 @@ void TimelineWidget::addAudioItemToTrack(const QString& filePath, int trackIndex
     }
     qDebug() << "Target track found and valid";
     
+    // Get real audio file duration
+    qreal actualDuration = getAudioFileDuration(filePath);
+    
     // Create audio item at timeline start position (0,0)
     qreal startTime = 0.0; // Start at beginning of timeline
-    qreal duration = 300.0; // Default 3 seconds duration (will be updated when we get actual audio duration)
+    qreal duration = actualDuration > 0 ? actualDuration : 300.0; // Use actual duration or fallback to 3 seconds
     QColor color = QColor::fromHsv(120, 180, 220); // Nice blue-green color for loaded audio
+    
+    qDebug() << "=== AUDIO FILE DURATION DETECTION ===";
+    qDebug() << "File:" << filePath;
+    qDebug() << "Raw duration from getAudioFileDuration():" << actualDuration << "seconds";
+    qDebug() << "Final duration being used:" << duration << "seconds";
+    qDebug() << "Duration in pixels (100px/sec):" << (duration * 100.0) << "pixels";
+    qDebug() << "Duration in minutes:" << (duration / 60.0) << "minutes";
+    qDebug() << "=========================================";
     
     qDebug() << "Creating AudioItem with parameters:";
     qDebug() << "  - trackIndex:" << trackIndex;
@@ -148,10 +167,13 @@ void TimelineWidget::addAudioItemToTrack(const QString& filePath, int trackIndex
     m_scene->addItem(audioItem);
     qDebug() << "Audio item added to scene";
     
-    // Connect signals
-    qDebug() << "Connecting signals...";
+    // Connect signals with detailed logging
+    qDebug() << "Connecting signals for item:" << (void*)audioItem;
+    qDebug() << "Connecting currentItem signal...";
     QObject::connect(audioItem, &AudioItem::currentItem, this, &TimelineWidget::setCurrentItem);
-    qDebug() << "Signals connected";
+    qDebug() << "Connecting removeRequested signal...";
+    QObject::connect(audioItem, &AudioItem::removeRequested, this, &TimelineWidget::removeAudioItem);
+    qDebug() << "All signals connected for item:" << (void*)audioItem;
     
     qDebug() << "Successfully added audio item to track" << trackIndex << "from file:" << filePath;
     qDebug() << "=== TimelineWidget::addAudioItemToTrack END ===";
@@ -539,50 +561,67 @@ void TimelineWidget::moveIndicator(){
         m_indicator->setPos(newX, m_timeIndicatorHeight);
         m_indicator->blockSignals(false);
         
-        // Force scene update to prevent artifacts and ensure visibility during scrolling
-        m_scene->update();
+        // Optimize scene updates - only update the indicator's region
+        QRectF updateRect = m_indicator->boundingRect().translated(m_indicator->scenePos());
+        m_scene->update(updateRect);
         
-        // Ensure indicator stays visible and properly rendered
-        m_indicator->update();
-        
-        // Center view less frequently to reduce artifacts
+        // Center view much less frequently to reduce artifacts and improve performance
         static int updateCounter = 0;
-        if (++updateCounter % 10 == 0) { // Only center every 10th update
-            m_view->centerOn(newX, m_view->mapToScene(m_view->viewport()->rect().center()).y());
+        if (++updateCounter % 30 == 0) { // Only center every 30th update (0.5 seconds)
+            QRectF visibleRect = m_view->mapToScene(m_view->viewport()->rect()).boundingRect();
+            if (newX < visibleRect.left() + 100 || newX > visibleRect.right() - 100) {
+                m_view->centerOn(newX, m_view->mapToScene(m_view->viewport()->rect().center()).y());
+            }
         }
         
-        // Emit position change for transport dock sync (throttled)
+        // Only emit position changes during manual interaction, not during playback
+        // Check if this is a user-initiated move vs audio engine position update
         static QTime lastEmit;
         QTime currentTime = QTime::currentTime();
-        if (!lastEmit.isValid() || lastEmit.msecsTo(currentTime) > 16) { // Throttle to 60fps (16ms)
+        if (!lastEmit.isValid() || lastEmit.msecsTo(currentTime) > 33) { // Throttle to 30fps (33ms) for UI updates
             double seconds = newX / 100.0;
-            emit indicatorPositionChanged(seconds);
+            
+            // Only emit if not in playback mode to prevent feedback loops
+            if (!m_isPlaybackMode) {
+                qDebug() << "TimelineWidget: Manual indicator position change to" << seconds << "seconds";
+                emit indicatorPositionChanged(seconds);
+            } else {
+                qDebug() << "TimelineWidget: Suppressing position emission during playback";
+            }
             lastEmit = currentTime;
         }
     }
 }
 
 void TimelineWidget::setIndicatorPosition(double seconds) {
-    qDebug() << "TimelineWidget::setIndicatorPosition called with seconds:" << seconds;
-    qDebug() << "  - m_indicator valid:" << (m_indicator != nullptr);
-    
     if (m_indicator) {
         // Convert seconds to pixels (assuming 100px = 1 second)
         double xPos = seconds * 100.0;
-        qDebug() << "  - Setting indicator position to xPos:" << xPos;
         
         // Block signals to prevent infinite loops
         m_indicator->blockSignals(true);
         m_indicator->setPos(xPos, m_timeIndicatorHeight);
         m_indicator->blockSignals(false);
-        if (qAbs(xPos - lastCenteredPos) > 50) {
-            qDebug() << "  - Centering view on indicator";
-            m_view->centerOn(xPos, m_view->mapToScene(m_view->viewport()->rect().center()).y());
-            lastCenteredPos = xPos;
+        
+        // Optimize scene updates - only update the indicator's region
+        QRectF updateRect = m_indicator->boundingRect().translated(m_indicator->scenePos());
+        m_scene->update(updateRect);
+        
+        // Use the same throttled centering logic as direct indicator movement
+        static QTime lastCenterTime;
+        static double lastCenteredPos = -1000;
+        QTime currentTime = QTime::currentTime();
+        
+        // Only center if enough time has passed AND position change is significant
+        if ((!lastCenterTime.isValid() || lastCenterTime.msecsTo(currentTime) > 100) && 
+            qAbs(xPos - lastCenteredPos) > 300) {
+            QRectF visibleRect = m_view->mapToScene(m_view->viewport()->rect()).boundingRect();
+            if (xPos < visibleRect.left() + 100 || xPos > visibleRect.right() - 100) {
+                m_view->centerOn(xPos, m_view->mapToScene(m_view->viewport()->rect().center()).y());
+                lastCenteredPos = xPos;
+                lastCenterTime = currentTime;
+            }
         }
-        qDebug() << "  - Indicator position set successfully";
-    } else {
-        qDebug() << "  - ERROR: m_indicator is null!";
     }
 }
 
@@ -594,20 +633,150 @@ double TimelineWidget::getIndicatorPosition() const {
     return 0.0;
 }
 
+void TimelineWidget::startTimelineMovement() {
+    m_isMoving = true;
+    if (m_playTimer) {
+        m_playTimer->start(); // Use the interval set in setupConnections (16ms for 60fps)
+    }
+}
+
+void TimelineWidget::stopTimelineMovement() {
+    m_isMoving = false;
+    if (m_playTimer) {
+        m_playTimer->stop();
+    }
+}
+
 void TimelineWidget::onIndicatorMoved(TimelineIndicator* indicator) {
     Q_UNUSED(indicator)
     
-    // Focus on the indicator (but don't emit signals during this)
-    focusOnItem(m_indicator);
+    // Always emit the current position to ensure transport dock stays in sync
+    double seconds = m_indicator->scenePos().x() / 100.0; // Convert pixels to seconds
+    emit indicatorPositionChanged(seconds);
     
-    // Throttle position updates to prevent excessive signals
-    static QTime lastEmitTime;
+    // Throttle expensive operations like focusing and scene updates
+    static QTime lastUpdateTime;
     QTime currentTime = QTime::currentTime();
     
-    if (!lastEmitTime.isValid() || lastEmitTime.msecsTo(currentTime) > 16) { // Throttle to 60fps max
-        // Emit position change for transport dock sync
-        double seconds = m_indicator->scenePos().x() / 100.0; // Convert pixels to seconds
-        emit indicatorPositionChanged(seconds);
-        lastEmitTime = currentTime;
+    if (!lastUpdateTime.isValid() || lastUpdateTime.msecsTo(currentTime) > 33) { // Throttle to 30fps for UI responsiveness
+        // Focus on the indicator with reduced frequency
+        focusOnItem(m_indicator);
+        lastUpdateTime = currentTime;
+        
+        // Optimize scene updates - only update the indicator's region
+        QRectF updateRect = m_indicator->boundingRect().translated(m_indicator->scenePos());
+        m_scene->update(updateRect);
     }
+}
+
+void TimelineWidget::removeAudioItem(AudioItem* item) {
+    if (!item) {
+        qDebug() << "ERROR: Cannot remove null audio item";
+        return;
+    }
+    
+    qDebug() << "=== SAFE AUDIO ITEM REMOVAL ===" ;
+    
+    // Step 1: Immediately hide the item to prevent further interaction
+    item->setVisible(false);
+    item->setEnabled(false);
+    
+    // Step 2: Disconnect ALL signals and slots to prevent callbacks
+    QObject::disconnect(item, nullptr, nullptr, nullptr);
+    
+    // Step 3: Clear any references to this item
+    if (currentItem == item) {
+        currentItem = nullptr;
+    }
+    
+    // Step 4: Remove from tracks (simple approach)
+    for (Track* track : m_tracks) {
+        track->removeAudioItem(item);
+    }
+    
+    // Step 5: Remove from scene immediately
+    if (m_scene && item->scene() == m_scene) {
+        m_scene->removeItem(item);
+    }
+    
+    // Step 6: Force immediate deletion instead of deleteLater
+    delete item;
+    
+    // Step 7: Force scene update
+    if (m_scene) {
+        m_scene->update();
+    }
+    
+    qDebug() << "=== AUDIO ITEM REMOVAL COMPLETE ===";
+}
+
+void TimelineWidget::setPlaybackMode(bool isPlaying) {
+    m_isPlaybackMode = isPlaying;
+    qDebug() << "TimelineWidget: Playback mode set to" << isPlaying;
+}
+
+qreal TimelineWidget::getAudioFileDuration(const QString& filePath) {
+    qDebug() << "=== DETECTING AUDIO FILE DURATION ===";
+    qDebug() << "File path:" << filePath;
+    
+#if HAVE_FFMPEG
+    qDebug() << "Using FFmpeg for duration detection";
+    
+    AVFormatContext *formatContext = avformat_alloc_context();
+    if (!formatContext) {
+        qDebug() << "ERROR: Could not allocate format context";
+        return -1.0;
+    }
+
+    if (avformat_open_input(&formatContext, filePath.toStdString().c_str(), nullptr, nullptr) != 0) {
+        qDebug() << "ERROR: Could not open file for duration detection";
+        avformat_free_context(formatContext);
+        return -1.0;
+    }
+
+    if (avformat_find_stream_info(formatContext, nullptr) < 0) {
+        qDebug() << "ERROR: Could not find stream information";
+        avformat_close_input(&formatContext);
+        return -1.0;
+    }
+
+    // Get duration in seconds
+    double duration = 0.0;
+    if (formatContext->duration != AV_NOPTS_VALUE) {
+        duration = static_cast<double>(formatContext->duration) / AV_TIME_BASE;
+        qDebug() << "FFmpeg detected duration:" << duration << "seconds";
+    } else {
+        qDebug() << "WARNING: Could not determine duration from FFmpeg";
+        duration = -1.0;
+    }
+
+    avformat_close_input(&formatContext);
+    return duration;
+    
+#else
+    qDebug() << "FFmpeg not available, using Qt Multimedia for duration detection";
+    
+    // Use Qt's QMediaPlayer for duration detection
+    QFileInfo fileInfo(filePath);
+    if (!fileInfo.exists()) {
+        qDebug() << "ERROR: Audio file does not exist:" << filePath;
+        return -1.0;
+    }
+    
+    // Estimate duration based on file size (rough approximation)
+    qint64 fileSize = fileInfo.size();
+    
+    // Rough estimation: assume average bitrate of 128 kbps for MP3
+    // Duration (seconds) = (file size in bytes * 8) / (bitrate in bits per second)
+    double estimatedDuration = (static_cast<double>(fileSize) * 8.0) / (128.0 * 1000.0);
+    
+    qDebug() << "File size:" << fileSize << "bytes";
+    qDebug() << "Estimated duration (128kbps assumption):" << estimatedDuration << "seconds";
+    
+    // Clamp to reasonable values (between 1 second and 10 minutes)
+    estimatedDuration = qBound(1.0, estimatedDuration, 600.0);
+    
+    qDebug() << "Final estimated duration:" << estimatedDuration << "seconds";
+    return estimatedDuration;
+#endif
 }

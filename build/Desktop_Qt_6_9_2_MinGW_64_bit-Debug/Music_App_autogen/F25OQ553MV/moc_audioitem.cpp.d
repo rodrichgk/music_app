@@ -36,6 +36,7 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtCore/qdarwinhelpers.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qdatastream.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qdebug.h \
+  C:/Qt/6.9.2/mingw_64/include/QtCore/qendian.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qexceptionhandling.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qflags.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qfloat16.h \
@@ -125,13 +126,24 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.9.2/mingw_64/include/QtGui/QAction \
   C:/Qt/6.9.2/mingw_64/include/QtGui/QBrush \
   C:/Qt/6.9.2/mingw_64/include/QtGui/QColor \
+  C:/Qt/6.9.2/mingw_64/include/QtGui/qaction.h \
+  C:/Qt/6.9.2/mingw_64/include/QtGui/qbitmap.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qbrush.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qcolor.h \
+  C:/Qt/6.9.2/mingw_64/include/QtGui/qcursor.h \
+  C:/Qt/6.9.2/mingw_64/include/QtGui/qfont.h \
+  C:/Qt/6.9.2/mingw_64/include/QtGui/qfontinfo.h \
+  C:/Qt/6.9.2/mingw_64/include/QtGui/qfontmetrics.h \
+  C:/Qt/6.9.2/mingw_64/include/QtGui/qfontvariableaxis.h \
+  C:/Qt/6.9.2/mingw_64/include/QtGui/qicon.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qimage.h \
+  C:/Qt/6.9.2/mingw_64/include/QtGui/qkeysequence.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qpaintdevice.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qpainterpath.h \
+  C:/Qt/6.9.2/mingw_64/include/QtGui/qpalette.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qpixelformat.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qpixmap.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qpolygon.h \
@@ -145,10 +157,14 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qwindowdefs_win.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/QGraphicsRectItem \
+  C:/Qt/6.9.2/mingw_64/include/QtWidgets/QMenu \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qgraphicsitem.h \
+  C:/Qt/6.9.2/mingw_64/include/QtWidgets/qmenu.h \
+  C:/Qt/6.9.2/mingw_64/include/QtWidgets/qsizepolicy.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qtwidgetsexports.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
+  C:/Qt/6.9.2/mingw_64/include/QtWidgets/qwidget.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/algorithm \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/array \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/atomic \

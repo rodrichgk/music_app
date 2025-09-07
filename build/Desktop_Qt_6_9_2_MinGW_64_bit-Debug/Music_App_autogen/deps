@@ -1,10 +1,14 @@
 Music_App_autogen/timestamp: \
+	C:/Qt/6.9.2/mingw_64/include/QtCore/QBuffer \
+	C:/Qt/6.9.2/mingw_64/include/QtCore/QByteArray \
+	C:/Qt/6.9.2/mingw_64/include/QtCore/QIODevice \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/QList \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/QMutex \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/QObject \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/QSettings \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/QStandardPaths \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/QString \
+	C:/Qt/6.9.2/mingw_64/include/QtCore/QTime \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/QTimer \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/QUrl \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/q17memory.h \
@@ -27,10 +31,12 @@ Music_App_autogen/timestamp: \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qbasicatomic.h \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qbasictimer.h \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qbindingstorage.h \
+	C:/Qt/6.9.2/mingw_64/include/QtCore/qbuffer.h \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qbytearray.h \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qbytearrayalgorithms.h \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qbytearraylist.h \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qbytearrayview.h \
+	C:/Qt/6.9.2/mingw_64/include/QtCore/qcalendar.h \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qchar.h \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qcompare.h \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qcompare_impl.h \
@@ -44,6 +50,7 @@ Music_App_autogen/timestamp: \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qcontiguouscache.h \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qdarwinhelpers.h \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qdatastream.h \
+	C:/Qt/6.9.2/mingw_64/include/QtCore/qdatetime.h \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qdeadlinetimer.h \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qdebug.h \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qelapsedtimer.h \
@@ -148,6 +155,7 @@ Music_App_autogen/timestamp: \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qversiontagging.h \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qxptype_traits.h \
 	C:/Qt/6.9.2/mingw_64/include/QtCore/qyieldcpu.h \
+	C:/Qt/6.9.2/mingw_64/include/QtGui/QAction \
 	C:/Qt/6.9.2/mingw_64/include/QtGui/QBrush \
 	C:/Qt/6.9.2/mingw_64/include/QtGui/QColor \
 	C:/Qt/6.9.2/mingw_64/include/QtGui/QPainter \
@@ -184,10 +192,15 @@ Music_App_autogen/timestamp: \
 	C:/Qt/6.9.2/mingw_64/include/QtGui/qvalidator.h \
 	C:/Qt/6.9.2/mingw_64/include/QtGui/qwindowdefs.h \
 	C:/Qt/6.9.2/mingw_64/include/QtGui/qwindowdefs_win.h \
+	C:/Qt/6.9.2/mingw_64/include/QtMultimedia/QAudioFormat \
 	C:/Qt/6.9.2/mingw_64/include/QtMultimedia/QAudioOutput \
+	C:/Qt/6.9.2/mingw_64/include/QtMultimedia/QAudioSink \
 	C:/Qt/6.9.2/mingw_64/include/QtMultimedia/QMediaPlayer \
 	C:/Qt/6.9.2/mingw_64/include/QtMultimedia/qaudio.h \
+	C:/Qt/6.9.2/mingw_64/include/QtMultimedia/qaudiodevice.h \
+	C:/Qt/6.9.2/mingw_64/include/QtMultimedia/qaudioformat.h \
 	C:/Qt/6.9.2/mingw_64/include/QtMultimedia/qaudiooutput.h \
+	C:/Qt/6.9.2/mingw_64/include/QtMultimedia/qaudiosink.h \
 	C:/Qt/6.9.2/mingw_64/include/QtMultimedia/qmediaplayer.h \
 	C:/Qt/6.9.2/mingw_64/include/QtMultimedia/qtaudio.h \
 	C:/Qt/6.9.2/mingw_64/include/QtMultimedia/qtmultimedia-config.h \
@@ -203,6 +216,7 @@ Music_App_autogen/timestamp: \
 	C:/Qt/6.9.2/mingw_64/include/QtWidgets/QLabel \
 	C:/Qt/6.9.2/mingw_64/include/QtWidgets/QListWidget \
 	C:/Qt/6.9.2/mingw_64/include/QtWidgets/QMainWindow \
+	C:/Qt/6.9.2/mingw_64/include/QtWidgets/QMenu \
 	C:/Qt/6.9.2/mingw_64/include/QtWidgets/QPushButton \
 	C:/Qt/6.9.2/mingw_64/include/QtWidgets/QSlider \
 	C:/Qt/6.9.2/mingw_64/include/QtWidgets/QSpinBox \
@@ -229,6 +243,7 @@ Music_App_autogen/timestamp: \
 	C:/Qt/6.9.2/mingw_64/include/QtWidgets/qlistview.h \
 	C:/Qt/6.9.2/mingw_64/include/QtWidgets/qlistwidget.h \
 	C:/Qt/6.9.2/mingw_64/include/QtWidgets/qmainwindow.h \
+	C:/Qt/6.9.2/mingw_64/include/QtWidgets/qmenu.h \
 	C:/Qt/6.9.2/mingw_64/include/QtWidgets/qpushbutton.h \
 	C:/Qt/6.9.2/mingw_64/include/QtWidgets/qrubberband.h \
 	C:/Qt/6.9.2/mingw_64/include/QtWidgets/qscrollarea.h \
@@ -735,6 +750,10 @@ Music_App_autogen/timestamp: \
 	C:/Users/kibar/Documents/music_app/src/audioengine.cpp \
 	C:/Users/kibar/Documents/music_app/src/audioengine.h \
 	C:/Users/kibar/Documents/music_app/src/audioerror.h \
+	C:/Users/kibar/Documents/music_app/src/audioiodevice.cpp \
+	C:/Users/kibar/Documents/music_app/src/audioiodevice.h \
+	C:/Users/kibar/Documents/music_app/src/ffmpegaudioengine.cpp \
+	C:/Users/kibar/Documents/music_app/src/ffmpegaudioengine.h \
 	C:/Users/kibar/Documents/music_app/src/main.cpp \
 	C:/Users/kibar/Documents/music_app/src/mainwindow.cpp \
 	C:/Users/kibar/Documents/music_app/src/mainwindow.h \

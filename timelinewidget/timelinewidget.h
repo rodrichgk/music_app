@@ -31,6 +31,16 @@ public:
     // Transport dock integration
     void setIndicatorPosition(double seconds);
     double getIndicatorPosition() const;
+    
+    // Playback state management
+    void setPlaybackMode(bool isPlaying);
+    
+    // Direct timeline movement control (like spacebar)
+    void startTimelineMovement();
+    void stopTimelineMovement();
+    
+    // Audio file duration detection
+    qreal getAudioFileDuration(const QString& filePath);
 private:
     QGraphicsItem *currentItem;
     QGraphicsScene* m_scene = nullptr;
@@ -65,7 +75,9 @@ private:
     void addTimeIndicators();
     void addSecondLines();
     QSplitter* m_splitter;
-
+    
+    // Playback state flag to prevent position feedback loops
+    bool m_isPlaybackMode = false;
 
 protected:
     void wheelEvent(QWheelEvent *event) override;
@@ -79,6 +91,7 @@ public slots:
     void onTrackListScrolled(int value);
     void onTimelineScrolled(int value);
     void onIndicatorMoved(TimelineIndicator* indicator);
+    void removeAudioItem(AudioItem* item);
 
 signals:
     void indicatorPositionChanged(double seconds);

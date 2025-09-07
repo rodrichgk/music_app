@@ -11,7 +11,8 @@ Track::Track(int trackHeight, qreal trackWidth) :
 }
 
 Track::~Track() {
-    qDeleteAll(m_audioItems);
+    // Don't delete audio items here - they should be managed by the scene/timeline
+    m_audioItems.clear();
 }
 
 void Track::setName(const QString& name) {
@@ -29,6 +30,15 @@ QString Track::name() const {
 void Track::addAudioItem(AudioItem* item) {
     m_audioItems.append(item);
     //connect(item, &AudioItem::positionChanged, this, &Track::handleAudioItemPositionChange);
+}
+
+bool Track::removeAudioItem(AudioItem* item) {
+    int index = m_audioItems.indexOf(item);
+    if (index != -1) {
+        m_audioItems.removeAt(index);
+        return true;
+    }
+    return false;
 }
 
 QList<AudioItem*> Track::audioItems() const {

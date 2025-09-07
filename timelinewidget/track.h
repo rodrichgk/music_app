@@ -21,6 +21,7 @@ public:
     void updateTrackWidth(qreal trackWidth);
 
     void addAudioItem(AudioItem* item);
+    bool removeAudioItem(AudioItem* item);
     QList<AudioItem*> audioItems() const;
 
     void setMute(bool mute);
