@@ -62,7 +62,7 @@
 			{
 				"command" : 4,
 				"file" : 2,
-				"line" : 60,
+				"line" : 64,
 				"parent" : 0
 			},
 			{
@@ -92,25 +92,25 @@
 			{
 				"command" : 5,
 				"file" : 2,
-				"line" : 99,
+				"line" : 103,
 				"parent" : 0
 			},
 			{
 				"command" : 6,
 				"file" : 2,
-				"line" : 79,
+				"line" : 83,
 				"parent" : 0
 			},
 			{
 				"command" : 7,
 				"file" : 2,
-				"line" : 71,
+				"line" : 75,
 				"parent" : 0
 			},
 			{
 				"command" : 7,
 				"file" : 2,
-				"line" : 80,
+				"line" : 84,
 				"parent" : 0
 			},
 			{
@@ -452,13 +452,13 @@
 			{
 				"command" : 14,
 				"file" : 2,
-				"line" : 81,
+				"line" : 85,
 				"parent" : 0
 			},
 			{
 				"command" : 15,
 				"file" : 2,
-				"line" : 78,
+				"line" : 82,
 				"parent" : 0
 			}
 		]
@@ -599,7 +599,9 @@
 				14,
 				16,
 				18,
-				20
+				20,
+				22,
+				24
 			]
 		}
 	],
@@ -775,7 +777,9 @@
 				14,
 				16,
 				18,
-				20
+				20,
+				22,
+				24
 			]
 		},
 		{
@@ -792,7 +796,9 @@
 				17,
 				19,
 				21,
-				22
+				23,
+				25,
+				26
 			]
 		},
 		{
@@ -806,14 +812,14 @@
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				23
+				27
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				24
+				28
 			]
 		}
 	],
@@ -884,6 +890,28 @@
 		{
 			"backtrace" : 5,
 			"path" : "src/ffmpegaudioengine.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 5,
+			"compileGroupIndex" : 0,
+			"path" : "src/audioiodevice.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 5,
+			"path" : "src/audioiodevice.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 5,
+			"compileGroupIndex" : 0,
+			"path" : "src/audioimportdialog.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 5,
+			"path" : "src/audioimportdialog.h",
 			"sourceGroupIndex" : 1
 		},
 		{

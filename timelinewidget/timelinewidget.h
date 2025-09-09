@@ -13,6 +13,8 @@
 #include <QTimer>
 #include <QSplitter>
 #include "TimelineIndicator.h"
+#include "trackheaderwidget.h"
+#include "tracksettingsdialog.h"
 #include "../src/appconfig.h"
 
 class TimelineWidget : public QWidget {
@@ -22,7 +24,8 @@ public:
     TimelineWidget(QWidget* parent = nullptr);
     void addTrack(Track* track);
     void createTracksAndItems();
-    void addAudioItemToTrack(const QString& filePath, int trackIndex = 0);
+    void addAudioItemToTrack(const QString& filePath, int trackIndex = 0, const QColor& itemColor = QColor(255, 107, 107));
+    int getTrackCount() const;
     void performScroll();
     QTimer* scrollTimer;
     bool scrollLeft;
@@ -41,6 +44,10 @@ public:
     
     // Audio file duration detection
     qreal getAudioFileDuration(const QString& filePath);
+    
+public slots:
+    void onTrackMuteToggled(bool muted);
+    void openTrackSettingsDialog(Track* track);
 private:
     QGraphicsItem *currentItem;
     QGraphicsScene* m_scene = nullptr;

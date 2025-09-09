@@ -26,6 +26,18 @@ public:
 
     void setMute(bool mute);
     bool isMute() const;
+    
+    // New mixer properties
+    int getIndex() const { return m_index; }
+    void setIndex(int index);
+    void setMuted(bool muted) { m_mute = muted; }
+    bool isMuted() const { return m_mute; }
+    void setVolume(float volume) { m_volume = volume; }
+    float getVolume() const { return m_volume; }
+    void setPan(float pan) { m_pan = pan; }
+    float getPan() const { return m_pan; }
+    void setSoloed(bool soloed) { m_solo = soloed; }
+    bool isSoloed() const { return m_solo; }
 
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
@@ -39,6 +51,12 @@ private:
     bool m_mute;
     int m_trackHeight;
     int m_trackWidth;
+    
+    // New mixer properties
+    int m_index;
+    float m_volume;
+    float m_pan;
+    bool m_solo;
 };
 
 #endif // TRACK_H

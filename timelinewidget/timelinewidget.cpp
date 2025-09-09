@@ -62,10 +62,11 @@ void TimelineWidget::createTracksAndItems() {
     }
 }
 
-void TimelineWidget::addAudioItemToTrack(const QString& filePath, int trackIndex) {
+void TimelineWidget::addAudioItemToTrack(const QString& filePath, int trackIndex, const QColor& itemColor) {
     qDebug() << "=== TimelineWidget::addAudioItemToTrack START ===";
     qDebug() << "File path:" << filePath;
     qDebug() << "Track index:" << trackIndex;
+    qDebug() << "Item color:" << itemColor.name();
     qDebug() << "Number of tracks available:" << m_tracks.size();
     
     // Ensure we have tracks and the requested track exists
@@ -103,7 +104,7 @@ void TimelineWidget::addAudioItemToTrack(const QString& filePath, int trackIndex
     qDebug() << "  - duration:" << duration;
     qDebug() << "  - trackHeight:" << m_trackHeight;
     
-    AudioItem* audioItem = new AudioItem(trackIndex, startTime, duration, color, m_trackHeight, nullptr);
+    AudioItem* audioItem = new AudioItem(trackIndex, startTime, duration, itemColor, m_trackHeight, nullptr);
     if (!audioItem) {
         qDebug() << "ERROR: Failed to create audio item";
         return;
@@ -179,6 +180,59 @@ void TimelineWidget::addAudioItemToTrack(const QString& filePath, int trackIndex
     qDebug() << "=== TimelineWidget::addAudioItemToTrack END ===";
 }
 
+int TimelineWidget::getTrackCount() const
+{
+    return m_tracks.size();
+}
+
+void TimelineWidget::onTrackMuteToggled(bool muted)
+{
+    // Find which track header widget sent the signal
+    TrackHeaderWidget* senderWidget = qobject_cast<TrackHeaderWidget*>(sender());
+    if (!senderWidget) {
+        qDebug() << "TimelineWidget: Could not identify sender of mute toggle signal";
+        return;
+    }
+    
+    qDebug() << "TimelineWidget: Track mute toggled to" << muted;
+    
+    // The track model is already updated by the TrackHeaderWidget
+    // Here we could add additional logic like:
+    // - Update audio engine to actually mute the track
+    // - Visual feedback in the timeline
+    // - Notify other components
+}
+
+void TimelineWidget::openTrackSettingsDialog(Track* track)
+{
+    if (!track) {
+        qDebug() << "TimelineWidget: Cannot open settings for null track";
+        return;
+    }
+    
+    qDebug() << "TimelineWidget: Opening settings dialog for track" << track->getIndex();
+    
+    // Create and show the track settings dialog
+    TrackSettingsDialog* dialog = new TrackSettingsDialog(track, this);
+    
+    // Connect to apply changes in real-time if needed
+    // connect(dialog, &TrackSettingsDialog::settingsChanged, this, &TimelineWidget::onTrackSettingsChanged);
+    
+    // Show dialog modally
+    int result = dialog->exec();
+    
+    if (result == QDialog::Accepted) {
+        qDebug() << "TimelineWidget: Track settings dialog accepted";
+        // Settings are already applied by the dialog
+        // Could add additional processing here if needed
+    } else {
+        qDebug() << "TimelineWidget: Track settings dialog cancelled";
+    }
+    
+    // Clean up
+    dialog->deleteLater();
+}
+
 void TimelineWidget::setupUi() {
 
     initializelayout();
@@ -188,11 +242,14 @@ void TimelineWidget::setupUi() {
     addTimeIndicators();
     addSecondLines();
 
-    m_splitter->addWidget(m_trackList);
+    QWidget* trackListContainer = new QWidget();
+    QVBoxLayout* trackListLayout = new QVBoxLayout(trackListContainer);
+    trackListLayout->setContentsMargins(0, 0, 0, 0); // Remove any extra padding
+    trackListLayout->setSpacing(0);
+    trackListLayout->addSpacing(m_timeIndicatorHeight);
+    trackListLayout->addWidget(m_trackList);
+    m_splitter->addWidget(trackListContainer);
     m_splitter->addWidget(m_view);
-    
-    // Offset the track list widget to align with timeline content
-    m_trackList->move(0, m_timeIndicatorHeight);
 }
 
 void TimelineWidget::setupConnections() {
@@ -243,7 +300,7 @@ void TimelineWidget::setupTrackList(){
     m_trackList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff); // Sync with timeline scroll
     m_trackList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_trackList->setSelectionMode(QAbstractItemView::SingleSelection);
-    m_trackList->setSpacing(0); // Remove spacing between items for better alignment
+    m_trackList->setSpacing(0);
     m_trackList->setStyleSheet("QListWidget { border: none; background: transparent; }");
 }
 
@@ -300,16 +357,25 @@ void TimelineWidget::addSecondLines(){
 }
 
 void TimelineWidget::addTrack(Track* track) {
-    // Add track info to QListWidget
-    QListWidgetItem* trackItem = new QListWidgetItem(track->name(), m_trackList);
+    // Set track index for proper identification
+    int trackIndex = m_tracks.size();
+    track->setIndex(trackIndex);
     
-    // Set exact height to match track height in timeline
+    // Create TrackHeaderWidget instead of simple QListWidgetItem
+    TrackHeaderWidget* headerWidget = new TrackHeaderWidget(track, this);
+    
+    // Connect signals from header widget
+    connect(headerWidget, &TrackHeaderWidget::muteToggled, this, &TimelineWidget::onTrackMuteToggled);
+    connect(headerWidget, &TrackHeaderWidget::settingsRequested, this, &TimelineWidget::openTrackSettingsDialog);
+    
+    // Create QListWidgetItem to hold the custom widget
+    QListWidgetItem* trackItem = new QListWidgetItem(m_trackList);
     trackItem->setSizeHint(QSize(m_trackIdWidth, m_trackHeight));
-    trackItem->setFlags(trackItem->flags() | Qt::ItemIsUserCheckable); // Add checkbox
-    trackItem->setCheckState(Qt::Unchecked); // Default to not muted
+    
+    // Set the custom widget as the item widget
+    m_trackList->setItemWidget(trackItem, headerWidget);
     
     // Position the track properly in the scene to align with track list
-    int trackIndex = m_tracks.size();
     track->setPos(0, trackIndex * m_trackHeight + m_timeIndicatorHeight); // Account for time indicators height
     
     // Add the track to the scene

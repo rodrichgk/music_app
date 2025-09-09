@@ -434,6 +434,12 @@
 			null
 		],
 		[
+			"C:/Users/kibar/Documents/music_app/src/audioimportdialog.h",
+			"MU",
+			"UVLADIE3JM/moc_audioimportdialog.cpp",
+			null
+		],
+		[
 			"C:/Users/kibar/Documents/music_app/src/audioiodevice.h",
 			"MU",
 			"UVLADIE3JM/moc_audioiodevice.cpp",
@@ -479,6 +485,18 @@
 			"C:/Users/kibar/Documents/music_app/timelinewidget/track.h",
 			"MU",
 			"F25OQ553MV/moc_track.cpp",
+			null
+		],
+		[
+			"C:/Users/kibar/Documents/music_app/timelinewidget/trackheaderwidget.h",
+			"MU",
+			"F25OQ553MV/moc_trackheaderwidget.cpp",
+			null
+		],
+		[
+			"C:/Users/kibar/Documents/music_app/timelinewidget/tracksettingsdialog.h",
+			"MU",
+			"F25OQ553MV/moc_tracksettingsdialog.cpp",
 			null
 		]
 	],
@@ -562,6 +580,11 @@
 		[ "C:/Users/kibar/Documents/music_app/src/appconfig.cpp", "MU", null ],
 		[ "C:/Users/kibar/Documents/music_app/src/audioengine.cpp", "MU", null ],
 		[
+			"C:/Users/kibar/Documents/music_app/src/audioimportdialog.cpp",
+			"MU",
+			null
+		],
+		[
 			"C:/Users/kibar/Documents/music_app/src/audioiodevice.cpp",
 			"MU",
 			null
@@ -595,6 +618,16 @@
 		],
 		[
 			"C:/Users/kibar/Documents/music_app/timelinewidget/track.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/kibar/Documents/music_app/timelinewidget/trackheaderwidget.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/kibar/Documents/music_app/timelinewidget/tracksettingsdialog.cpp",
 			"MU",
 			null
 		]

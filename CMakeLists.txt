@@ -43,6 +43,8 @@ set(PROJECT_SOURCES
     src/ffmpegaudioengine.h
     src/audioiodevice.cpp
     src/audioiodevice.h
+    src/audioimportdialog.cpp
+    src/audioimportdialog.h
     src/transportdock.cpp
     src/transportdock.h
     timelinewidget/timelinewidget.cpp
@@ -53,6 +55,10 @@ set(PROJECT_SOURCES
     timelinewidget/track.h
     timelinewidget/TimelineIndicator.cpp
     timelinewidget/TimelineIndicator.h
+    timelinewidget/trackheaderwidget.cpp
+    timelinewidget/trackheaderwidget.h
+    timelinewidget/tracksettingsdialog.cpp
+    timelinewidget/tracksettingsdialog.h
 )
 
 # -------------------------------

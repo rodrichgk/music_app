@@ -105,6 +105,14 @@ build CMakeFiles/Music_App.dir/src/audioiodevice.cpp.obj: CXX_COMPILER__Music_Ap
   OBJECT_DIR = CMakeFiles\Music_App.dir
   OBJECT_FILE_DIR = CMakeFiles\Music_App.dir\src
 
+build CMakeFiles/Music_App.dir/src/audioimportdialog.cpp.obj: CXX_COMPILER__Music_App_unscanned_Debug C$:/Users/kibar/Documents/music_app/src/audioimportdialog.cpp || cmake_object_order_depends_target_Music_App
+  DEFINES = -DHAVE_FFMPEG=1 -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NEEDS_QMAIN -DQT_NETWORK_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\Music_App.dir\src\audioimportdialog.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Music_App_autogen/include -IC:/vcpkg/installed/x64-mingw-dynamic/include -isystem C:/Qt/6.9.2/mingw_64/include/QtCore -isystem C:/Qt/6.9.2/mingw_64/include -isystem C:/Qt/6.9.2/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.9.2/mingw_64/include/QtWidgets -isystem C:/Qt/6.9.2/mingw_64/include/QtGui -isystem C:/Qt/6.9.2/mingw_64/include/QtMultimedia -isystem C:/Qt/6.9.2/mingw_64/include/QtNetwork
+  OBJECT_DIR = CMakeFiles\Music_App.dir
+  OBJECT_FILE_DIR = CMakeFiles\Music_App.dir\src
+
 build CMakeFiles/Music_App.dir/src/transportdock.cpp.obj: CXX_COMPILER__Music_App_unscanned_Debug C$:/Users/kibar/Documents/music_app/src/transportdock.cpp || cmake_object_order_depends_target_Music_App
   DEFINES = -DHAVE_FFMPEG=1 -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NEEDS_QMAIN -DQT_NETWORK_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
   DEP_FILE = CMakeFiles\Music_App.dir\src\transportdock.cpp.obj.d
@@ -145,6 +153,22 @@ build CMakeFiles/Music_App.dir/timelinewidget/TimelineIndicator.cpp.obj: CXX_COM
   OBJECT_DIR = CMakeFiles\Music_App.dir
   OBJECT_FILE_DIR = CMakeFiles\Music_App.dir\timelinewidget
 
+build CMakeFiles/Music_App.dir/timelinewidget/trackheaderwidget.cpp.obj: CXX_COMPILER__Music_App_unscanned_Debug C$:/Users/kibar/Documents/music_app/timelinewidget/trackheaderwidget.cpp || cmake_object_order_depends_target_Music_App
+  DEFINES = -DHAVE_FFMPEG=1 -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NEEDS_QMAIN -DQT_NETWORK_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\Music_App.dir\timelinewidget\trackheaderwidget.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Music_App_autogen/include -IC:/vcpkg/installed/x64-mingw-dynamic/include -isystem C:/Qt/6.9.2/mingw_64/include/QtCore -isystem C:/Qt/6.9.2/mingw_64/include -isystem C:/Qt/6.9.2/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.9.2/mingw_64/include/QtWidgets -isystem C:/Qt/6.9.2/mingw_64/include/QtGui -isystem C:/Qt/6.9.2/mingw_64/include/QtMultimedia -isystem C:/Qt/6.9.2/mingw_64/include/QtNetwork
+  OBJECT_DIR = CMakeFiles\Music_App.dir
+  OBJECT_FILE_DIR = CMakeFiles\Music_App.dir\timelinewidget
+
+build CMakeFiles/Music_App.dir/timelinewidget/tracksettingsdialog.cpp.obj: CXX_COMPILER__Music_App_unscanned_Debug C$:/Users/kibar/Documents/music_app/timelinewidget/tracksettingsdialog.cpp || cmake_object_order_depends_target_Music_App
+  DEFINES = -DHAVE_FFMPEG=1 -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NEEDS_QMAIN -DQT_NETWORK_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\Music_App.dir\timelinewidget\tracksettingsdialog.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Music_App_autogen/include -IC:/vcpkg/installed/x64-mingw-dynamic/include -isystem C:/Qt/6.9.2/mingw_64/include/QtCore -isystem C:/Qt/6.9.2/mingw_64/include -isystem C:/Qt/6.9.2/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.9.2/mingw_64/include/QtWidgets -isystem C:/Qt/6.9.2/mingw_64/include/QtGui -isystem C:/Qt/6.9.2/mingw_64/include/QtMultimedia -isystem C:/Qt/6.9.2/mingw_64/include/QtNetwork
+  OBJECT_DIR = CMakeFiles\Music_App.dir
+  OBJECT_FILE_DIR = CMakeFiles\Music_App.dir\timelinewidget
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Music_App
@@ -153,7 +177,7 @@ build CMakeFiles/Music_App.dir/timelinewidget/TimelineIndicator.cpp.obj: CXX_COM
 #############################################
 # Link the executable Music_App.exe
 
-build Music_App.exe: CXX_EXECUTABLE_LINKER__Music_App_Debug CMakeFiles/Music_App.dir/Music_App_autogen/mocs_compilation.cpp.obj CMakeFiles/Music_App.dir/src/main.cpp.obj CMakeFiles/Music_App.dir/src/mainwindow.cpp.obj CMakeFiles/Music_App.dir/src/appconfig.cpp.obj CMakeFiles/Music_App.dir/src/audioengine.cpp.obj CMakeFiles/Music_App.dir/src/ffmpegaudioengine.cpp.obj CMakeFiles/Music_App.dir/src/audioiodevice.cpp.obj CMakeFiles/Music_App.dir/src/transportdock.cpp.obj CMakeFiles/Music_App.dir/timelinewidget/timelinewidget.cpp.obj CMakeFiles/Music_App.dir/timelinewidget/audioitem.cpp.obj CMakeFiles/Music_App.dir/timelinewidget/track.cpp.obj CMakeFiles/Music_App.dir/timelinewidget/TimelineIndicator.cpp.obj | C$:/Qt/6.9.2/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.9.2/mingw_64/lib/libQt6Multimedia.a C$:/Qt/6.9.2/mingw_64/lib/libQt6Gui.a C$:/Qt/6.9.2/mingw_64/lib/libQt6Network.a C$:/Qt/6.9.2/mingw_64/lib/libQt6Core.a C$:/Qt/6.9.2/mingw_64/lib/libQt6EntryPoint.a || Music_App_autogen Music_App_autogen_timestamp_deps
+build Music_App.exe: CXX_EXECUTABLE_LINKER__Music_App_Debug CMakeFiles/Music_App.dir/Music_App_autogen/mocs_compilation.cpp.obj CMakeFiles/Music_App.dir/src/main.cpp.obj CMakeFiles/Music_App.dir/src/mainwindow.cpp.obj CMakeFiles/Music_App.dir/src/appconfig.cpp.obj CMakeFiles/Music_App.dir/src/audioengine.cpp.obj CMakeFiles/Music_App.dir/src/ffmpegaudioengine.cpp.obj CMakeFiles/Music_App.dir/src/audioiodevice.cpp.obj CMakeFiles/Music_App.dir/src/audioimportdialog.cpp.obj CMakeFiles/Music_App.dir/src/transportdock.cpp.obj CMakeFiles/Music_App.dir/timelinewidget/timelinewidget.cpp.obj CMakeFiles/Music_App.dir/timelinewidget/audioitem.cpp.obj CMakeFiles/Music_App.dir/timelinewidget/track.cpp.obj CMakeFiles/Music_App.dir/timelinewidget/TimelineIndicator.cpp.obj CMakeFiles/Music_App.dir/timelinewidget/trackheaderwidget.cpp.obj CMakeFiles/Music_App.dir/timelinewidget/tracksettingsdialog.cpp.obj | C$:/Qt/6.9.2/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.9.2/mingw_64/lib/libQt6Multimedia.a C$:/Qt/6.9.2/mingw_64/lib/libQt6Gui.a C$:/Qt/6.9.2/mingw_64/lib/libQt6Network.a C$:/Qt/6.9.2/mingw_64/lib/libQt6Core.a C$:/Qt/6.9.2/mingw_64/lib/libQt6EntryPoint.a || Music_App_autogen Music_App_autogen_timestamp_deps
   FLAGS = -DQT_QML_DEBUG -g
   LINK_FLAGS = -mwindows
   LINK_LIBRARIES = C:/Qt/6.9.2/mingw_64/lib/libQt6Widgets.a  C:/Qt/6.9.2/mingw_64/lib/libQt6Multimedia.a  -lavformat  -lavcodec  -lavutil  -lswresample  -lswscale  C:/Qt/6.9.2/mingw_64/lib/libQt6Gui.a  -ld3d11  -ldxgi  -ldxguid  -ld3d12  C:/Qt/6.9.2/mingw_64/lib/libQt6Network.a  C:/Qt/6.9.2/mingw_64/lib/libQt6Core.a  -lmpr  -luserenv  -lmingw32  C:/Qt/6.9.2/mingw_64/lib/libQt6EntryPoint.a  -lshell32  -lws2_32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32

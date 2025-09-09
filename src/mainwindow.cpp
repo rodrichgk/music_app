@@ -3,6 +3,7 @@
 #include "../timelinewidget/timelinewidget.h"
 #include "transportdock.h"
 #include "ffmpegaudioengine.h"
+#include "audioimportdialog.h"
 #include <QBoxLayout>
 #include <QDateTime>
 #include <QDebug>
@@ -219,30 +220,44 @@ void MainWindow::loadAudioFile()
         "Audio Files (*.mp3 *.wav *.m4a *.ogg *.flac *.aac);;All Files (*)");
     
     if (!fileName.isEmpty()) {
-        AudioResult result = m_audioEngine->loadAudioFile(fileName);
-        if (result.isSuccess()) {
-            qDebug() << "Audio engine successfully loaded file, now adding to timeline...";
+        // Show import dialog to let user choose track and color
+        int totalTracks = m_timelineWidget->getTrackCount();
+        AudioImportDialog importDialog(fileName, totalTracks, this);
+        
+        if (importDialog.exec() == QDialog::Accepted) {
+            AudioImportDialog::ImportSettings settings = importDialog.getImportSettings();
             
-            // Add the loaded audio to the first track in the timeline
-            qDebug() << "Calling addAudioItemToTrack with file:" << fileName;
-            m_timelineWidget->addAudioItemToTrack(fileName, 0);
-            qDebug() << "addAudioItemToTrack completed";
-            
-            // Reset timeline position when new audio is loaded
-            qDebug() << "Resetting timeline and transport positions...";
-            m_timelineWidget->setIndicatorPosition(0.0);
-            m_transportDock->setPosition(0.0);
-            qDebug() << "Position reset completed";
-            
-            // Show success dialog AFTER all operations are complete
-            qDebug() << "About to show success dialog...";
-            QMessageBox::information(this, "Audio Loaded", 
-                QString("Successfully loaded: %1").arg(QFileInfo(fileName).fileName()));
-            qDebug() << "Success dialog closed, loadAudioFile method completing";
+            AudioResult result = m_audioEngine->loadAudioFile(fileName);
+            if (result.isSuccess()) {
+                qDebug() << "Audio engine successfully loaded file, now adding to timeline...";
+                qDebug() << "Import settings - Track:" << settings.targetTrack << "Color:" << settings.itemColor.name();
+                
+                // Add the loaded audio to the selected track with chosen color
+                qDebug() << "Calling addAudioItemToTrack with file:" << fileName;
+                m_timelineWidget->addAudioItemToTrack(fileName, settings.targetTrack, settings.itemColor);
+                qDebug() << "addAudioItemToTrack completed";
+                
+                // Reset timeline position when new audio is loaded
+                qDebug() << "Resetting timeline and transport positions...";
+                m_timelineWidget->setIndicatorPosition(0.0);
+                m_transportDock->setPosition(0.0);
+                qDebug() << "Position reset completed";
+                
+                // Show success dialog AFTER all operations are complete
+                qDebug() << "About to show success dialog...";
+                QMessageBox::information(this, "Audio Loaded", 
+                    QString("Successfully loaded: %1\nTrack: %2\nColor: %3")
+                    .arg(QFileInfo(fileName).fileName())
+                    .arg(settings.targetTrack + 1)
+                    .arg(settings.itemColor.name()));
+                qDebug() << "Success dialog closed, loadAudioFile method completing";
+            } else {
+                QMessageBox::warning(this, "Load Failed", 
+                    QString("Failed to load audio file:\n%1").arg(result.getErrorMessage()));
+                qDebug() << "Failed to load audio file:" << fileName << result.getErrorMessage();
+            }
         } else {
-            QMessageBox::warning(this, "Load Failed", 
-                QString("Failed to load audio file:\n%1").arg(result.getErrorMessage()));
-            qDebug() << "Failed to load audio file:" << fileName << result.getErrorMessage();
+            qDebug() << "User cancelled audio import dialog";
         }
     }
 }

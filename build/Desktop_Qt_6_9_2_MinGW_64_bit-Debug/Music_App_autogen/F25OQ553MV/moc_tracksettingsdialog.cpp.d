@@ -1,15 +1,8 @@
-C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Music_App_autogen/F25OQ553MV/moc_timelinewidget.cpp: C:/Users/kibar/Documents/music_app/timelinewidget/timelinewidget.h \
+C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Music_App_autogen/F25OQ553MV/moc_tracksettingsdialog.cpp: C:/Users/kibar/Documents/music_app/timelinewidget/tracksettingsdialog.h \
   C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Music_App_autogen/moc_predefs.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/QList \
   C:/Qt/6.9.2/mingw_64/include/QtCore/QObject \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/QRect \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/QSettings \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/QSize \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/QSizeF \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/QStandardPaths \
   C:/Qt/6.9.2/mingw_64/include/QtCore/QString \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/QTime \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/QTimer \
   C:/Qt/6.9.2/mingw_64/include/QtCore/q17memory.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/q20functional.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/q20iterator.h \
@@ -17,7 +10,6 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtCore/q20type_traits.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/q20utility.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/q23utility.h \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/qabstracteventdispatcher.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qabstractitemmodel.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qalgorithms.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qanystringview.h \
@@ -28,13 +20,11 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtCore/qatomic.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qatomic_cxx11.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qbasicatomic.h \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/qbasictimer.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qbindingstorage.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qbytearray.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qbytearrayalgorithms.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qbytearraylist.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qbytearrayview.h \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/qcalendar.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qchar.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qcompare.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qcompare_impl.h \
@@ -46,17 +36,10 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtCore/qcontainerinfo.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qcontainertools_impl.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qcontiguouscache.h \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/qcoreapplication.h \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/qcoreapplication_platform.h \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/qcoreevent.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qdarwinhelpers.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qdatastream.h \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/qdatetime.h \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/qdeadlinetimer.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qdebug.h \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/qelapsedtimer.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qendian.h \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/qeventloop.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qexceptionhandling.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qflags.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qfloat16.h \
@@ -86,7 +69,6 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtCore/qmetatype.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qminmax.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qnamespace.h \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/qnativeinterface.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qnumeric.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qobject.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qobject_impl.h \
@@ -102,14 +84,12 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtCore/qscopedpointer.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qscopeguard.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qset.h \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/qsettings.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qshareddata.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qshareddata_impl.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qsharedpointer.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qsharedpointer_impl.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qsize.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qspan.h \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/qstandardpaths.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qstdlibdetection.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qstring.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qstringalgorithms.h \
@@ -137,7 +117,6 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtCore/qtenvironmentvariables.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qtextstream.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qtformat_impl.h \
-  C:/Qt/6.9.2/mingw_64/include/QtCore/qtimer.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qtmetamacros.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qtnoop.h \
   C:/Qt/6.9.2/mingw_64/include/QtCore/qtpreprocessorsupport.h \
@@ -158,42 +137,29 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtGui/QAction \
   C:/Qt/6.9.2/mingw_64/include/QtGui/QBrush \
   C:/Qt/6.9.2/mingw_64/include/QtGui/QColor \
-  C:/Qt/6.9.2/mingw_64/include/QtGui/QMouseEvent \
-  C:/Qt/6.9.2/mingw_64/include/QtGui/QPainter \
-  C:/Qt/6.9.2/mingw_64/include/QtGui/QTransform \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qaction.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qbitmap.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qbrush.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qcolor.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qcursor.h \
-  C:/Qt/6.9.2/mingw_64/include/QtGui/qevent.h \
-  C:/Qt/6.9.2/mingw_64/include/QtGui/qeventpoint.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qfont.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qfontinfo.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qfontmetrics.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qfontvariableaxis.h \
-  C:/Qt/6.9.2/mingw_64/include/QtGui/qguiapplication.h \
-  C:/Qt/6.9.2/mingw_64/include/QtGui/qguiapplication_platform.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qicon.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qimage.h \
-  C:/Qt/6.9.2/mingw_64/include/QtGui/qinputdevice.h \
-  C:/Qt/6.9.2/mingw_64/include/QtGui/qinputmethod.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qkeysequence.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qpaintdevice.h \
-  C:/Qt/6.9.2/mingw_64/include/QtGui/qpainter.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qpainterpath.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qpalette.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qpen.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qpicture.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qpixelformat.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qpixmap.h \
-  C:/Qt/6.9.2/mingw_64/include/QtGui/qpointingdevice.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qpolygon.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qregion.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qrgb.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qrgba64.h \
-  C:/Qt/6.9.2/mingw_64/include/QtGui/qscreen.h \
-  C:/Qt/6.9.2/mingw_64/include/QtGui/qscreen_platform.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qtextcursor.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qtextdocument.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qtextformat.h \
@@ -203,8 +169,6 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtGui/qtguiglobal.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qtransform.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qvalidator.h \
-  C:/Qt/6.9.2/mingw_64/include/QtGui/qvector2d.h \
-  C:/Qt/6.9.2/mingw_64/include/QtGui/qvectornd.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.9.2/mingw_64/include/QtGui/qwindowdefs_win.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/QComboBox \
@@ -212,8 +176,6 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/QDialog \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/QGraphicsItem \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/QGraphicsRectItem \
-  C:/Qt/6.9.2/mingw_64/include/QtWidgets/QGraphicsScene \
-  C:/Qt/6.9.2/mingw_64/include/QtWidgets/QGraphicsView \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/QGridLayout \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/QGroupBox \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/QHBoxLayout \
@@ -224,9 +186,7 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/QPushButton \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/QSlider \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/QSpinBox \
-  C:/Qt/6.9.2/mingw_64/include/QtWidgets/QSplitter \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/QVBoxLayout \
-  C:/Qt/6.9.2/mingw_64/include/QtWidgets/QWidget \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qabstractbutton.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qabstractitemview.h \
@@ -239,8 +199,6 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qdialog.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qframe.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qgraphicsitem.h \
-  C:/Qt/6.9.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
-  C:/Qt/6.9.2/mingw_64/include/QtWidgets/qgraphicsview.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qgridlayout.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qgroupbox.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qlabel.h \
@@ -252,11 +210,9 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qmenu.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qpushbutton.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qrubberband.h \
-  C:/Qt/6.9.2/mingw_64/include/QtWidgets/qscrollarea.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qsizepolicy.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qslider.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qspinbox.h \
-  C:/Qt/6.9.2/mingw_64/include/QtWidgets/qsplitter.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qstyle.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qstyleoption.h \
   C:/Qt/6.9.2/mingw_64/include/QtWidgets/qtabbar.h \
@@ -480,13 +436,9 @@ C:/Users/kibar/Documents/music_app/build/Desktop_Qt_6_9_2_MinGW_64_bit-Debug/Mus
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/time.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/vadefs.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
-  C:/Users/kibar/Documents/music_app/src/appconfig.h \
   C:/Users/kibar/Documents/music_app/src/audioerror.h \
-  C:/Users/kibar/Documents/music_app/timelinewidget/TimelineIndicator.h \
   C:/Users/kibar/Documents/music_app/timelinewidget/audioitem.h \
   C:/Users/kibar/Documents/music_app/timelinewidget/track.h \
-  C:/Users/kibar/Documents/music_app/timelinewidget/trackheaderwidget.h \
-  C:/Users/kibar/Documents/music_app/timelinewidget/tracksettingsdialog.h \
   C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/avcodec.h \
   C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/codec.h \
   C:/vcpkg/installed/x64-mingw-dynamic/include/libavcodec/codec_desc.h \

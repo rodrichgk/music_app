@@ -5,9 +5,18 @@ Track::Track(int trackHeight, qreal trackWidth) :
     QGraphicsItem(),
     m_trackHeight(trackHeight),
     m_mute(false),
-    m_trackWidth(trackWidth)
+    m_trackWidth(trackWidth),
+    m_index(0),
+    m_volume(1.0f),
+    m_pan(0.0f),
+    m_solo(false)
 {
 
+}
+
+void Track::setIndex(int index)
+{
+    m_index = index;
 }
 
 Track::~Track() {
